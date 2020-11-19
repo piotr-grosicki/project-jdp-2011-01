@@ -17,9 +17,7 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createGroup")
-    public void createGroup(@RequestBody GroupDto groupDto){
-
-    }
+    public void createGroup(@RequestBody GroupDto groupDto){ }
 
     @RequestMapping(method = RequestMethod.GET, value = "getGroup")
     public GroupDto getGroup(@RequestParam Long groupId) {

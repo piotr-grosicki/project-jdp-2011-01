@@ -8,4 +8,5 @@ public class GroupDto {
         this.id = id;
         this.groupName = groupName;
     }
+
 }
