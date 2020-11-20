@@ -17,14 +17,13 @@ public class ProductController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public ProductDto getProduct(){
-        return new ProductDto();
+    public ProductDto getProduct(@RequestParam Long productId){
+        return new ProductDto(1l, "Get name", "get desc", 1);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-        public void createProduct(@RequestBody ProductDto productDto){
-        }
-
+    public void createProduct(@RequestBody ProductDto productDto){
+    }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
     public ProductDto updateProduct (@RequestBody ProductDto productDto){
