@@ -24,17 +24,14 @@ public class CartController {
     public List<String> getProductCart (@RequestParam long cartId, @RequestParam long productId) {
         return new ArrayList<String>();
     }
-
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
     public String addProductToCart (@RequestParam long cartIdId,@RequestParam long productId,@RequestParam double quantity) {
         return "New List of products with added product";
     }
-
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
     public void deleteProductFromCart (@RequestParam long cartIdId,@RequestParam long productId) {
         System.out.println("New List of products without product");
     }
-
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder (@RequestParam long userId) {
         return new OrderDto(5L,"Name of order created by CartController", "Order content");
