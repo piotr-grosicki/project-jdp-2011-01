@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/v1/cart")
 public class CartController {
     @RequestMapping(method = RequestMethod.POST, value = "createNewCart")
-    public void createNewCart (long userId) {
+    public void createNewCart (@RequestParam long userId) {
         new CartDto (1L,1L, "List of products");
     }
 
