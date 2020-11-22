@@ -14,4 +14,27 @@ public class UserDto {
         this.isBlocked = isBlocked;
         this.userKey = userKey;
     }
+
+    public UserDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserSurname() {
+        return userSurname;
+    }
+
+    public Boolean getBlocked() {
+        return isBlocked;
+    }
+
+    public String getUserKey() {
+        return userKey;
+    }
 }
