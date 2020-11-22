@@ -9,4 +9,14 @@ public class GroupDto {
         this.groupName = groupName;
     }
 
+    public GroupDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
 }
