@@ -40,7 +40,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "blockUser")
     public UserDto blockUser(@RequestParam Long userId){
-        return new UserDto(1l, "Name", "Surname", false, "123");
+        return new UserDto(1l, "Name", "Surname", true, "123");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createUserKey")
