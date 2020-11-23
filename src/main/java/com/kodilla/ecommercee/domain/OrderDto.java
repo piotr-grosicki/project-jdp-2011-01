@@ -1,29 +1,16 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderDto {
-
     private Long id;
     private String orderName;
     private String orderContent;
-
-    public OrderDto(Long id, String orderName, String orderContent) {
-        this.id = id;
-        this.orderName = orderName;
-        this.orderContent = orderContent;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getOrderName() {
-        return orderName;
-    }
-
-    public String getOrderContent() {
-        return orderContent;
-    }
 }
 
 
