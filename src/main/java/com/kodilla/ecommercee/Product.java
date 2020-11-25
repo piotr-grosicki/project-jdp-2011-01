@@ -53,4 +53,60 @@ public class Product {
 
     public Product() {
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    public double getProductPrice() {
+        return productPrice;
+    }
+
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public void setProductPrice(double productPrice) {
+        this.productPrice = productPrice;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }

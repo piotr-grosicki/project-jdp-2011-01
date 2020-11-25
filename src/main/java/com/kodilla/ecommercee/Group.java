@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "GROUPS_OFPRODUCTS")
+@Table(name = "GROUPS_OF_PRODUCTS")
 public class Group {
     @Id
     @NotNull
-    @Column(name = "GROUP_OFPRODUCTS_ID")
+    @Column(name = "GROUP_OF_PRODUCTS_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
