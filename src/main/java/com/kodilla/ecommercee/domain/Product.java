@@ -9,7 +9,7 @@ import java.util.List;
 @Table (name = "PRODUCT")
 public final class Product {
 
-    private int product_id;
+    private int productId;
     private List<Order> orders = new ArrayList<>();
 
     public Product() {
@@ -19,12 +19,12 @@ public final class Product {
     @GeneratedValue
     @NotNull
     @Column(name = "PRODUCT_ID", unique = true)
-    public int getProduct_id() {
-        return product_id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProductId(int product_id) {
+        this.productId = product_id;
     }
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "product")

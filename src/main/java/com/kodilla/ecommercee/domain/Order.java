@@ -10,34 +10,32 @@ import java.util.List;
 @Table(name = "ORDER")
 public final class Order {
 
-    private int order_id;
-    private Date date_of_order;
-    private User user_id;
+    private int orderId;
+    private Date dateOfOrder;
+    private User userId;
     private List<Product> products = new ArrayList<>();
 
-    public Order(int order_id) {
-        this.order_id = order_id;
-        this.date_of_order = new Date();
+    public Order() {
     }
 
     @Id
     @GeneratedValue
     @NotNull
     @Column(name = "ORDER_ID", unique = true)
-    public int getOrder_id() {
-        return order_id;
+    public int getOrderId() {
+        return orderId;
     }
 
     @NotNull
     @Column(name = "DATE_OF_ORDER")
-    public Date getDate_of_order() {
-        return date_of_order;
+    public Date getDateOfOrder() {
+        return dateOfOrder;
     }
 
     @ManyToOne
     @JoinColumn(name = "USER_ID", nullable = false)
     public User getUserId() {
-        return user_id;
+        return userId;
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -51,15 +49,15 @@ public final class Order {
         return products;
     }
 
-    private void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    private void setOrderId(int order_id) {
+        this.orderId = order_id;
     }
 
-    private void setDate_of_order(Date date_of_order) {
-        this.date_of_order = date_of_order;
+    private void setDateOfOrder(Date date_of_order) {
+        this.dateOfOrder = date_of_order;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

@@ -9,8 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "USER")
 public final class User {
-    private int user_id;
-    private List<Order> order_id = new ArrayList<>();
+    private int userID;
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
@@ -19,8 +19,8 @@ public final class User {
     @GeneratedValue
     @NotNull
     @Column(name = "USER_ID", unique = true)
-    public int getUser_id() {
-        return user_id;
+    public int getUserID() {
+        return userID;
     }
 
     @OneToMany(
@@ -28,15 +28,15 @@ public final class User {
             mappedBy = "user",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<Order> getOrder_id() {
-        return order_id;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserID(int user_id) {
+        this.userID = user_id;
     }
 
-    public void setOrder_id(List<Order> order_id) {
-        this.order_id = order_id;
+    public void setOrders(List<Order> order_id) {
+        this.orders = order_id;
     }
 }
