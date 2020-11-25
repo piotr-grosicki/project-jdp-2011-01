@@ -1,6 +1,9 @@
 package com.kodilla.ecommercee;
 
 import com.kodilla.ecommercee.repository.GenericEntityRepository;
+import com.kodilla.ecommercee.repository.OrderRepository;
+import com.kodilla.ecommercee.repository.ProductRepository;
+import com.kodilla.ecommercee.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,15 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringRunner.class)
 @SpringBootTest()
 public class SpringBootJPAIntegrationTest {
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     private GenericEntityRepository genericEntityRepository;
