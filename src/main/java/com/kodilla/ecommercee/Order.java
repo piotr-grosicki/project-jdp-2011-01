@@ -9,8 +9,7 @@ import java.util.List;
 @Table(name = "ORDERS")
 public class Order {
     @Id
-    @NotNull
-    @Column(name = "ORDER_ID")
+    @Column(name = "ORDER_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

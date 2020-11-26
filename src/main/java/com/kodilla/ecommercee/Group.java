@@ -9,8 +9,7 @@ import java.util.List;
 @Table(name = "GROUPS_OF_PRODUCTS")
 public class Group {
     @Id
-    @NotNull
-    @Column(name = "GROUP_OF_PRODUCTS_ID")
+    @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

@@ -9,8 +9,7 @@ import java.util.List;
 @Table(name = "PRODUCTS")
 public class Product {
     @Id
-    @NotNull
-    @Column(name = "PRODUCT_ID")
+    @Column(name = "PRODUCT_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
@@ -18,15 +17,13 @@ public class Product {
     @JoinColumn(name = "GROUP_ID")
     private Group group;
 
-    @NotNull
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String productName;
 
     @Column(name = "DESCRIPTION")
     private String productDescription;
 
-    @NotNull
-    @Column(name = "PRICE")
+    @Column(name = "PRICE", nullable = false)
     private double productPrice;
 
     @ManyToMany
