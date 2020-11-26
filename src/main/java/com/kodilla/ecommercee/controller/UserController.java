@@ -1,5 +1,6 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.controller;
 
+import com.kodilla.ecommercee.domain.UserDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "blockUser")
     public UserDto blockUser(@RequestParam Long userId){
-        return new UserDto(1l, "Name", "Surname", false, "123");
+        return new UserDto(1l, "Name", "Surname", true, "123");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createUserKey")
