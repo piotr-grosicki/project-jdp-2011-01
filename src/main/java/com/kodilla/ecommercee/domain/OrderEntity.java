@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,14 +20,12 @@ public final class OrderEntity {
 
     @Id
     @GeneratedValue
-    @NotNull
-    @Column(name = "ORDER_ID", unique = true)
+    @Column(name = "ORDER_ID", unique = true, nullable = false)
     public int getOrderId() {
         return orderId;
     }
 
-    @NotNull
-    @Column(name = "DATE_OF_ORDER")
+    @Column(name = "DATE_OF_ORDER", nullable = false)
     public Date getDateOfOrder() {
         return dateOfOrder;
     }

@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +17,7 @@ public final class ProductEntity {
 
     @Id
     @GeneratedValue
-    @NotNull
-    @Column(name = "PRODUCT_ID", unique = true)
+    @Column(name = "PRODUCT_ID", unique = true, nullable = false)
     public int getProductId() {
         return productId;
     }
