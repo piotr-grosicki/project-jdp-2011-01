@@ -15,7 +15,6 @@ public final class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "CART_ID", unique = true, nullable = false)
-    @NotNull
     public int getCartId() {
         return cartId;
     }
