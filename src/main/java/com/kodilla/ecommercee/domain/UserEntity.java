@@ -13,7 +13,7 @@ public final class UserEntity {
     private String userPassword;
     private String userEmail;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity;
+
 
     public UserEntity() {
     }
@@ -41,12 +41,6 @@ public final class UserEntity {
         return orders;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
-    public CartEntity getCartEntity() {
-        return cartEntity;
-    }
-
     @Column(name = "USER_NAME")
     public String getUserName(){
         return userName;
@@ -60,10 +54,6 @@ public final class UserEntity {
     @Column(name = "USER_EMAIL")
     public String getUserEmail(){
         return userEmail;
-    }
-
-    public void setCardEntity(CartEntity cartEntity) {
-        this.cartEntity = cartEntity;
     }
 
     public void setOrders(List<OrderEntity> orders) {

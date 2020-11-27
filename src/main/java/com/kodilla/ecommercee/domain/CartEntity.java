@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "CART")
 public final class CartEntity {
     private int cartId;
+    private UserEntity userEntity;
 
     public CartEntity() {
     }
@@ -21,5 +22,15 @@ public final class CartEntity {
 
     public void setCartId(int cartId) {
         this.cartId = cartId;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }
