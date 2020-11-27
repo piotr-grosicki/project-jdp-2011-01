@@ -1,58 +1,35 @@
 package com.kodilla.ecommercee;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Entity
 @Table(name = "GROUP_OF_PRODUCTS")
 public class Group {
-    private Long id;
-    private String groupName;
-    private List<Product> listOfProducts = new ArrayList<>();
-
-    public Group(Long id, String groupName, List<Product> listOfProducts) {
-        this.id = id;
-        this.groupName = groupName;
-        this.listOfProducts = listOfProducts;
-    }
-
-    public Group() {
-    }
-
     @Id
-    @GeneratedValue
+    @Column(name = "GROUP_OF_PRODUCTS_ID", unique = true)
     @NotNull
-    @Column(name = "GROUP_ID", unique = true)
-    public Long getId() {
-        return id;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(name = "GROUP_NAME")
-    public String getGroupName() {
-        return groupName;
-    }
+    private String getGroupName;
 
     @Column(name = "LIST_OF_PRODUCTS")
     @OneToMany(
             targetEntity = Product.class,
-            mappedBy = "productGroup",
+            mappedBy = "group",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Product> getListOfProducts() {
-        return listOfProducts;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public void setListOfProducts(List<Product> listOfProducts) {
-        this.listOfProducts = listOfProducts;
-    }
+    private List<Product> products =  new ArrayList<>();
 }
