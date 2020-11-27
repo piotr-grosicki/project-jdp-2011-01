@@ -6,6 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @Repository
-public interface CartDao extends CrudRepository<Cart, Long> {
+public interface CartDao extends CrudRepository<CartEntity, Long> {
 
 }

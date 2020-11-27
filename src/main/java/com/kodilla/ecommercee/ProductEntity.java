@@ -1,13 +1,12 @@
 package com.kodilla.ecommercee;
 
-import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "PRODUCTS")
-public class Product {
+public class ProductEntity {
     @Id
     @Column(name = "PRODUCT_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -15,7 +14,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "GROUP_ID")
-    private Group group;
+    private GroupEntity group;
 
     @Column(name = "NAME", nullable = false)
     private String productName;
@@ -32,7 +31,7 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")}
     )
-    private List<Cart> carts = new ArrayList<>();
+    private List<CartEntity> carts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -40,22 +39,22 @@ public class Product {
             joinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")},
             inverseJoinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")}
     )
-    private List<Order> orders = new ArrayList<>();
+    private List<OrderEntity> orders = new ArrayList<>();
 
-    public Product(String productName, String productDescription, double productPrice) {
+    public ProductEntity(String productName, String productDescription, double productPrice) {
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
     }
 
-    public Product() {
+    public ProductEntity() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public Group getGroup() {
+    public GroupEntity getGroup() {
         return group;
     }
 
@@ -71,11 +70,11 @@ public class Product {
         return productPrice;
     }
 
-    public List<Cart> getCarts() {
+    public List<CartEntity> getCarts() {
         return carts;
     }
 
-    public List<Order> getOrders() {
+    public List<OrderEntity> getOrders() {
         return orders;
     }
 
@@ -83,7 +82,7 @@ public class Product {
         this.id = id;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(GroupEntity group) {
         this.group = group;
     }
 
@@ -99,11 +98,11 @@ public class Product {
         this.productPrice = productPrice;
     }
 
-    public void setCarts(List<Cart> carts) {
+    public void setCarts(List<CartEntity> carts) {
         this.carts = carts;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
 }
