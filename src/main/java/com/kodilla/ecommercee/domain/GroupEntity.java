@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "GROUPS_OF_PRODUCTS")
 public class GroupEntity {
     @Id
-    @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false)
+    @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 

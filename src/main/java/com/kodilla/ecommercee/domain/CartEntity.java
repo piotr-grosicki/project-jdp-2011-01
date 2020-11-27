@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "CARTS")
 public class CartEntity {
     @Id
-    @Column(name = "CART_ID", nullable = false)
+    @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
