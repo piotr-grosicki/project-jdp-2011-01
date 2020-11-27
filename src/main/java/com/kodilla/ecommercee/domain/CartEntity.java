@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import javax.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,4 +15,21 @@ public class CartEntity {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private List<ProductEntity> products = new ArrayList<>();
+
+    private Long cartId;
+    private UserEntity userEntity;
+
+    public CartEntity() {
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
+    }
+
 }
