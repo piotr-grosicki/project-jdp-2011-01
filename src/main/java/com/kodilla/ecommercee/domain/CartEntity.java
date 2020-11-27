@@ -12,6 +12,7 @@ public class CartEntity {
     private Long cartId;
     private UserEntity userEntity;
 
+
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
