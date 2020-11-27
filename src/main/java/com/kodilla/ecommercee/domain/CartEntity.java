@@ -12,6 +12,7 @@ public class CartEntity {
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
+
     private Long id;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
@@ -19,6 +20,7 @@ public class CartEntity {
 
     private Long cartId;
     private UserEntity userEntity;
+
 
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
