@@ -35,8 +35,6 @@ public class StubProduct {
     @NotNull
     @Column(name = "stubProduct_Price")
     private double productPrice;
-
-
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "stubProduct")
     private List<CartEntity> carts = new ArrayList<>();
     public void setCarts(List<CartEntity> carts) {

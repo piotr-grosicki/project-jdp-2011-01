@@ -12,13 +12,12 @@ public class CartEntity {
     private long cartId;
     private StubUser stubUser;
     private List<StubProduct> stubProduct = new ArrayList<>();
-
-
     public CartEntity(long cartId) {
         this.cartId = cartId;
     }
     public CartEntity() {
     }
+
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @NotNull
@@ -38,6 +37,7 @@ public class CartEntity {
     public void setStubUser(StubUser stubUser) {
         this.stubUser = stubUser;
     }
+
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(name = "JOIN_stubProduct_cart",
             joinColumns = {@JoinColumn(name = "cart_Id", referencedColumnName = "cart_Id")},

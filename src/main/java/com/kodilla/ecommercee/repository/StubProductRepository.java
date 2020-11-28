@@ -9,4 +9,5 @@ import javax.transaction.Transactional;
 @Transactional
 @Repository
 public interface StubProductRepository extends JpaRepository<StubProduct, Long> {
+
 }

@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
-//import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.DbCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-
 
 @RestController
 @RequestMapping("/v1/cart")
