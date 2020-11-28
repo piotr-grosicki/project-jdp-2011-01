@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,14 +34,6 @@ public class UserService {
     public String generateKey(String name, String surname, String password) {
         String toHexString = Long.toHexString(new SecureRandom().nextLong());
         return ("0000000000000000" + toHexString).substring(toHexString.length());
-    }
-
-    public List<UserEntity> getAllUsers() {
-        return repository.findAll();
-    }
-
-    public void deleteUser(Long id) {
-        repository.deleteById(id);
     }
 
 }
