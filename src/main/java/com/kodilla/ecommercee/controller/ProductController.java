@@ -35,6 +35,4 @@ public class ProductController {
     public void deleteProduct(@RequestParam Long productId){
 
     }
-
-
 }
