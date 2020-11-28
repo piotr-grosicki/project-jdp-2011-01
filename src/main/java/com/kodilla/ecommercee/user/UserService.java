@@ -12,15 +12,15 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-    public List<User> getAllUsers() {
+    public List<UserEntity> getAllUsers() {
         return repository.findAll();
     }
 
-    public Optional<User> getUser(Long id) {
+    public Optional<UserEntity> getUser(Long id) {
         return repository.findById(id);
     }
 
-    public User saveUser(User user) {
+    public UserEntity saveUser(UserEntity user) {
         return repository.save(user);
     }
 
