@@ -12,11 +12,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("v1/user")
 public class UserController {
 
-    private UserDto userDto;
+    private UserService service;
 
     @RequestMapping(method = GET, value = "getAllUsers")
     public List<UserDto> getAllUsers(){
-        return new ArrayList<>();
+        return service.getAllUsers();
     }
 
     @RequestMapping(method = GET, value = "getUser")
