@@ -21,7 +21,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
-    public List<String> getProductCart (@RequestParam long cartId, @RequestParam long productId) {
+    public List<String> getProductsCart (@RequestParam long cartId, @RequestParam long productId) {
         return new ArrayList<String>();
     }
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
