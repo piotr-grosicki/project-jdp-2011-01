@@ -28,4 +28,8 @@ public class UserEntity {
     @Column(name = "user_key")
     private String userKey;
 
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
+    }
+
 }
