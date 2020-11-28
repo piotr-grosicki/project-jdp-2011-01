@@ -1,5 +1,8 @@
 package com.kodilla.ecommercee.user;
 
+import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.domain.UserEntity;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
