@@ -1,13 +1,12 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
 //import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.service.DbCartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -22,10 +21,10 @@ public class CartController {
     @Autowired
     private DbCartService cartService;
     @Autowired
-    private Cart cart;
+    private CartEntity cart;
     @RequestMapping(method = RequestMethod.POST, value = "createNewCart", consumes = APPLICATION_JSON_VALUE)
     public void createNewCart (@RequestBody CartDto cartDto) {
-        cartService.createCart(cart);
+        System.out.println("Created new Cart");
     }
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
     public List<ProductDto> getProductsFromCart (@RequestParam long cartId) {

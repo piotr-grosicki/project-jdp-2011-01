@@ -3,19 +3,21 @@ package com.kodilla.ecommercee.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "stubUser")
+@Entity
+@Table(name = "stubUser")
 public class StubUser {
     @Id
+    @GeneratedValue
     @NotNull
+    @Column(name = "user_Id", unique = true)
     private Long id;
     @NotNull
     @Column(name = "userName")
