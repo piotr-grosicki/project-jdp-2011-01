@@ -1,6 +1,6 @@
 package com.kodilla.ecommercee.service;
 
-import com.kodilla.ecommercee.domain.Cart;
+import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DbCartService {
     @Autowired
     private CartRepository repository;
-    public Cart createCart (final Cart cart) {
+    public CartEntity createCart (final CartEntity cart) {
         return repository.save(cart);
     }
 
