@@ -1,4 +1,4 @@
-package com.kodilla.ecommercee.user;
+package com.kodilla.ecommercee.service;
 
 import com.kodilla.ecommercee.domain.UserEntity;
 import com.kodilla.ecommercee.repository.UserRepository;
