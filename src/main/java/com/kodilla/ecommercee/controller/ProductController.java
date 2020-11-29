@@ -14,7 +14,7 @@ public class ProductController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getProducts")
     public List<ProductDto> getProducts(){
-        return new ArrayList<>();
+        return productMapper.mapToProductDtoList(service.getAllProducts());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProduct")
