@@ -11,12 +11,19 @@ import java.util.List;
 @Table (name = "PRODUCTS")
 @NoArgsConstructor
 public final class ProductEntity {
-    public ProductEntity(String productName, String productDescription, double productPrice, GroupEntity group) {
+    public ProductEntity(Long productId, String productName, String productDescription, double productPrice, GroupEntity group) {
+        this.id = productId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
         this.group = group;
     }
+//    public ProductEntity(String productName, String productDescription, double productPrice, GroupEntity group) {
+//        this.productName = productName;
+//        this.productDescription = productDescription;
+//        this.productPrice = productPrice;
+//        this.group = group;
+//    }
 
     @Id
     @Column(name = "PRODUCT_ID", nullable = false, unique = true)
@@ -64,10 +71,6 @@ public final class ProductEntity {
         return id;
     }
 
-    public GroupEntity getGroup() {
-        return group;
-    }
-
     public String getProductName() {
         return productName;
     }
@@ -78,6 +81,10 @@ public final class ProductEntity {
 
     public double getProductPrice() {
         return productPrice;
+    }
+
+    public GroupEntity getGroup() {
+        return group;
     }
 
     public List<CartEntity> getCarts() {

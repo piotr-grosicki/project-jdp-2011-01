@@ -2,31 +2,36 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ProductMapper {
     public ProductEntity mapToProduct(final ProductDto productDto) {
         return new ProductEntity(
-                productDto.getId();
-                productDto.getGroup();
-                productDto.getName();
-
+                productDto.getId(),
+                productDto.getName(),
+                productDto.getDescription(),
+                productDto.getPrice(),
+                productDto.getGroup()
         );
     }
 
-    public TaskDto mapToTaskDto(final Task task) {
-        return new TaskDto(
-                task.getId(),
-                task.getTitle(),
-                task.getContent()
+    public ProductDto mapToProductDto(final ProductEntity product) {
+        return new ProductDto(
+                product.getProductId(),
+                product.getProductName(),
+                product.getProductDescription(),
+                product.getProductPrice(),
+                product.getGroup()
         );
     }
 
-    public List<TaskDto> mapToTaskDtoList(final List<Task> taskList) {
-        return taskList.stream()
-                .map(t -> new TaskDto(t.getId(), t.getTitle(), t.getContent()))
+    public List<ProductDto> mapToProductDtoList(final List<ProductEntity> productList) {
+        return productList.stream()
+                .map(p -> new ProductDto(p.getProductId(), p.getProductName(), p.getProductDescription(), p.getProductPrice(), p.getGroup()))
                 .collect(Collectors.toList());
     }
 }

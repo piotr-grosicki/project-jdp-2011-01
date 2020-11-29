@@ -7,14 +7,17 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
     private Long id;
-    private GroupEntity group;
     private String name;
     private String description;
     private double price;
+    private GroupEntity group;
     private List<CartEntity> carts;
     private List<OrderEntity> orders;
+
+    public ProductDto(Long id, String name, String description, double price, GroupEntity group) {
+
+    }
 }
