@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,15 +9,19 @@ import java.util.List;
 
 @Entity
 @Table (name = "PRODUCTS")
+@NoArgsConstructor
 public final class ProductEntity {
+    public ProductEntity(String productName, String productDescription, double productPrice, GroupEntity group) {
+        this.productName = productName;
+        this.productDescription = productDescription;
+        this.productPrice = productPrice;
+        this.group = group;
+    }
+
     @Id
     @Column(name = "PRODUCT_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "GROUP_ID")
-    private GroupEntity group;
 
     @Column(name = "NAME", nullable = false)
     private String productName;
@@ -25,6 +31,10 @@ public final class ProductEntity {
 
     @Column(name = "PRICE", nullable = false)
     private double productPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "GROUP_ID")
+    private GroupEntity group;
 
     @ManyToMany
     @JoinTable(
@@ -42,13 +52,12 @@ public final class ProductEntity {
     )
     private List<OrderEntity> orders = new ArrayList<>();
 
-    public ProductEntity(String productName, String productDescription, double productPrice) {
-        this.productName = productName;
-        this.productDescription = productDescription;
-        this.productPrice = productPrice;
+    public void addCart(CartEntity newCart) {
+        this.carts.add(newCart);
     }
 
-    public ProductEntity() {
+    public void addOrder(OrderEntity newOrder) {
+        this.orders.add(newOrder);
     }
 
     public Long getProductId() {
