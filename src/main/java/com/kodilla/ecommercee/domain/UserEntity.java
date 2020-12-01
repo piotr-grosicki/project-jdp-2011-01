@@ -1,7 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public final class UserEntity {
     public int getUserId() {
         return userId;
     }
+
 
     @OneToMany(
             targetEntity = OrderEntity.class,

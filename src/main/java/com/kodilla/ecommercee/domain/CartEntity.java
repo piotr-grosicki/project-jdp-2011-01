@@ -9,17 +9,16 @@ import java.util.List;
 @Entity
 @Table(name = "CARTS")
 public class CartEntity {
+    private Long cartId;
+    private UserEntity userEntity;
+
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
-
     private Long id;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private final List<ProductEntity> products = new ArrayList<>();
-
-    private Long cartId;
-    private UserEntity userEntity;
 
 
 
@@ -32,6 +31,5 @@ public class CartEntity {
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
-
 
 }
