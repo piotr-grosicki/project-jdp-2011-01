@@ -17,6 +17,7 @@ public final class UserEntity {
     private CartEntity cartEntity = new CartEntity();
 
 
+
     public UserEntity(String userName, String userPassword, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;

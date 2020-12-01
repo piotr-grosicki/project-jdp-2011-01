@@ -10,14 +10,12 @@ import java.util.List;
 @Entity
 @Table(name = "CARTS")
 public class CartEntity {
-    private Long cartId;
-    private UserEntity userEntity;
 
 
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cardId;
+    private Long cartId;
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private final List<ProductEntity> products = new ArrayList<>();
@@ -25,12 +23,10 @@ public class CartEntity {
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
+    public UserEntity userEntity;
+
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
-
 }
