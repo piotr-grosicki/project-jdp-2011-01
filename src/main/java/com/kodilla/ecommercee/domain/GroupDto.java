@@ -7,10 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
+public class GroupDto {
     private Long id;
-    private String orderName;
-    private String orderContent;
+    private String groupName;
 }
-
-

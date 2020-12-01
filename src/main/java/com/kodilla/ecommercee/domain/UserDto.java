@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDto {
+public class UserDto {
     private Long id;
-    private String orderName;
-    private String orderContent;
+    private String userName;
+    private String userSurname;
+    private Boolean isBlocked;
+    private String userKey;
 }
-
-
