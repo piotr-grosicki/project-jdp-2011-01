@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,18 +9,18 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "CARTS")
-public class CartEntity {
+public final class CartEntity {
+    private Long cartId;
+    private UserEntity userEntity;
+
+
+
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
 
-    private Long id;
-
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private final List<ProductEntity> products = new ArrayList<>();
-
-    private Long cartId;
-    private UserEntity userEntity;
 
 
 
@@ -32,6 +33,5 @@ public class CartEntity {
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
     }
-
 
 }

@@ -3,7 +3,7 @@ package com.kodilla.ecommercee.domain;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +24,7 @@ public final class UserEntity {
         this.userPassword = userPassword;
         this.userEmail = userEmail;
     }
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
