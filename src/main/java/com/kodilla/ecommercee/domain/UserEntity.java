@@ -9,14 +9,13 @@ import java.util.List;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "USER")
+@Table(name = "USERS")
 public final class UserEntity {
     private int userId;
     private String userName;
     private String userPassword;
     private String userEmail;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity;
 
 
     public UserEntity(String userName, String userPassword, String userEmail) {
@@ -42,12 +41,6 @@ public final class UserEntity {
         return orders;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
-    public CartEntity getCartEntity() {
-        return cartEntity;
-    }
-
     @Column(name = "USER_NAME")
     public String getUserName(){
         return userName;
@@ -61,10 +54,6 @@ public final class UserEntity {
     @Column(name = "USER_EMAIL")
     public String getUserEmail(){
         return userEmail;
-    }
-
-    public void setCartEntity(CartEntity cartEntity) {
-        this.cartEntity = cartEntity;
     }
 
     public void setOrders(List<OrderEntity> orders) {
