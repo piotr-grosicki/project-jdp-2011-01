@@ -22,7 +22,6 @@ public class CartEntity {
     private final List<ProductEntity> products = new ArrayList<>();
 
 
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     public UserEntity getUserEntity() {
