@@ -1,11 +1,14 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "GROUPS_OF_PRODUCTS")
+@NoArgsConstructor
 public final class GroupEntity {
     @Id
     @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false, unique = true)
@@ -13,7 +16,7 @@ public final class GroupEntity {
     private Long id;
 
     @Column(name = "GROUP_NAME")
-    private String groupName;
+    private String name;
 
     @Column(name = "LIST_OF_PRODUCTS")
     @OneToMany(
@@ -22,13 +25,10 @@ public final class GroupEntity {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<ProductEntity> products =  new ArrayList<>();
+    private List<ProductEntity> products = new ArrayList<>();
 
-    public GroupEntity(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public GroupEntity() {
+    public GroupEntity(String name) {
+        this.name = name;
     }
 
     public Long getId() {
@@ -39,12 +39,12 @@ public final class GroupEntity {
         this.id = id;
     }
 
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public void setName(String groupName) {
+        this.name = groupName;
     }
 
     public List<ProductEntity> getProducts() {
