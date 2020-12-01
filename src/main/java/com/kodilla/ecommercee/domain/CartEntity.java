@@ -8,6 +8,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "CARTS")
+
 public class CartEntity {
     private Long cartId;
     private UserEntity userEntity;
@@ -16,7 +17,9 @@ public class CartEntity {
     @Id
     @Column(name = "CART_ID", nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long cardId;
+
+
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "carts")
     private final List<ProductEntity> products = new ArrayList<>();
