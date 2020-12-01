@@ -14,7 +14,7 @@ public final class UserEntity {
     private String userPassword;
     private String userEmail;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity;
+    private CartEntity cartEntity = new CartEntity();
 
 
     public UserEntity(String userName, String userPassword, String userEmail) {
