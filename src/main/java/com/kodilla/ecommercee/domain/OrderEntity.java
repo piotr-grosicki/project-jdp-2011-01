@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "ORDERS")
 public final class OrderEntity {
 
     private int orderId;
