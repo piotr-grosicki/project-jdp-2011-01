@@ -1,5 +1,7 @@
 package com.kodilla.ecommercee.domain;
+
 import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -12,19 +14,22 @@ public class CartEntity {
     private long cartId;
     private StubUser stubUser;
     private List<StubProduct> stubProduct = new ArrayList<>();
+
     public CartEntity(long cartId) {
         this.cartId = cartId;
     }
+
     public CartEntity() {
     }
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column (name = "cart_Id", unique= true)
+    @Column(name = "cart_Id", unique = true)
     public long getCartId() {
         return cartId;
     }
+
     public void setCartId(long cartId) {
         this.cartId = cartId;
     }
@@ -34,11 +39,12 @@ public class CartEntity {
     public StubUser getStubUser() {
         return stubUser;
     }
+
     public void setStubUser(StubUser stubUser) {
         this.stubUser = stubUser;
     }
 
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "JOIN_stubProduct_cart",
             joinColumns = {@JoinColumn(name = "cart_Id", referencedColumnName = "cart_Id")},
             inverseJoinColumns = {@JoinColumn(name = "stubProduct_Id", referencedColumnName = "stubProduct_Id")}
@@ -46,10 +52,12 @@ public class CartEntity {
     public List<StubProduct> getStubProduct() {
         return stubProduct;
     }
+
     public void setStubProduct(List<StubProduct> stubProduct) {
         this.stubProduct = stubProduct;
     }
 }
+
 
 
 
