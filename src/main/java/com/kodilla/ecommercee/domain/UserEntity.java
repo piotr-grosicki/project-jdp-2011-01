@@ -23,6 +23,7 @@ public final class UserEntity {
         this.userEmail = userEmail;
     }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID", unique = true, nullable = false)
