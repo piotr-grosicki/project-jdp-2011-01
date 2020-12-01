@@ -10,7 +10,7 @@ import java.util.List;
 @Component
 @Entity
 @Table(name = "cart")
-public class CartEntity {
+public final class CartEntity {
     private long cartId;
     private StubUser stubUser;
     private List<StubProduct> stubProduct = new ArrayList<>();
