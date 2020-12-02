@@ -2,12 +2,14 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.UserEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -22,7 +24,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
     public List<String> getProductCart (@RequestParam long cartId, @RequestParam long productId) {
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
     public String addProductToCart (@RequestParam long cartIdId,@RequestParam long productId,@RequestParam double quantity) {
@@ -34,6 +36,6 @@ public class CartController {
     }
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder (@RequestParam long userId) {
-        return new OrderDto(5L,"Name of order created by CartController", "Order content");
+        return new OrderDto(new Date(), new ArrayList<>(), new UserEntity());
     }
 }
