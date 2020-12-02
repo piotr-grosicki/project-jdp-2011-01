@@ -41,6 +41,7 @@ public final class OrderEntity {
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
     )
+
     public List<ProductEntity> getProducts() {
         return products;
     }
