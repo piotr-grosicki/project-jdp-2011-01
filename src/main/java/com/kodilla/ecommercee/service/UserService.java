@@ -25,7 +25,7 @@ public class UserService {
     public Optional<UserEntity> blockUser(Long id) {
         Optional<UserEntity> userOptional = getUser(id);
         userOptional.ifPresent(user -> {
-            user.setBlocked(true);
+            user.setIsBlocked(true);
             saveUser(user);
         });
         return userOptional;

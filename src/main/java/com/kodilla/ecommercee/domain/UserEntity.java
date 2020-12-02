@@ -13,13 +13,16 @@ public final class UserEntity {
     private String userName;
     private String userPassword;
     private String userEmail;
-    private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity = new CartEntity();
+    private Boolean isBlocked;
 
+    private List<OrderEntity> orders = new ArrayList<>();
+
+    private CartEntity cartEntity = new CartEntity();
     public UserEntity(String userName, String userPassword, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
+        this.isBlocked = false;
     }
 
     @Id
@@ -59,6 +62,11 @@ public final class UserEntity {
         return userEmail;
     }
 
+    @Column(name = "BLOCKED")
+    public Boolean getIsBlocked() {
+        return isBlocked;
+    }
+
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
@@ -81,5 +89,9 @@ public final class UserEntity {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public void setIsBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 }

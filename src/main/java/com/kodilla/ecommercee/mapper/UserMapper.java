@@ -18,7 +18,8 @@ public class UserMapper {
                 user.getUserId(),
                 user.getUserName(),
                 user.getUserPassword(),
-                user.getUserEmail()
+                user.getUserEmail(),
+                user.getIsBlocked()
         );
     }
 
