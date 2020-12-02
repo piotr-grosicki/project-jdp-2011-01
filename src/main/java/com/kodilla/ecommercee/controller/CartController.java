@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
@@ -25,22 +26,27 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
+
     public List<ProductDto> getProductsFromCart(@RequestParam long cartId) {
         return new ArrayList<ProductDto>();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
-    public String addProductToCart(@RequestParam long cartId, @RequestParam long productId) {
+
+    public String addProductToCart(@RequestParam long cartId, @RequestParam long productId, @RequestParam double quantity) {
+
         return "New List of products with added product";
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
+
     public void deleteProductFromCart(@RequestParam long cartId, @RequestParam long productId) {
+
         System.out.println("New List of products without product");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam long userId) {
-        return new OrderDto(5L, "Name of order created by CartController", "Order content");
+        return new OrderDto(5L,new Date(),null,null);
     }
 }
