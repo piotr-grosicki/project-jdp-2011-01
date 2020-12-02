@@ -10,8 +10,8 @@ import java.util.List;
 @Table(name = "ORDERS")
 public final class OrderEntity {
 
-    private int orderId;
-    private Date dateOfOrder;
+    private Long orderId;
+    private Date orderDate;
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
 
@@ -21,15 +21,14 @@ public final class OrderEntity {
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID", unique = true, nullable = false)
-    public int getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
     @Column(name = "DATE_OF_ORDER", nullable = false)
-    public Date getDateOfOrder() {
-        return dateOfOrder;
+    public Date getOrderDate() {
+        return orderDate;
     }
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -51,12 +50,12 @@ public final class OrderEntity {
         this.userEntity = userEntity;
     }
 
-    private void setOrderId(int orderId) {
+    private void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-    private void setDateOfOrder(Date date_of_order) {
-        this.dateOfOrder = date_of_order;
+    private void setOrderDate(Date date_of_order) {
+        this.orderDate = date_of_order;
     }
 
     public void setProducts(List<ProductEntity> products) {

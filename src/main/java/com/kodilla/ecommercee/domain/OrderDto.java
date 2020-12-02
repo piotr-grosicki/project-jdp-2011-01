@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
-    private Long id;
-    private String orderName;
-    private String orderContent;
+    private Long orderId;
+    private Date orderDate;
+    private UserEntity userEntity;
 }
 
 
