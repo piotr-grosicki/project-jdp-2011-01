@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@NoArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public final class OrderEntity {
@@ -15,7 +17,10 @@ public final class OrderEntity {
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
 
-    public OrderEntity() {
+    public OrderEntity(Date orderDate, List<ProductEntity> products, UserEntity userEntity) {
+        this.orderDate = orderDate;
+        this.products = products;
+        this.userEntity = userEntity;
     }
 
     @Id
@@ -35,10 +40,10 @@ public final class OrderEntity {
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
-            )
-            public List<ProductEntity> getProducts() {
-            return products;
-            }
+    )
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
