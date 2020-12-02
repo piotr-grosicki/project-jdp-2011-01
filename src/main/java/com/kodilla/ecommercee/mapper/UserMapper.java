@@ -7,21 +7,18 @@ public class UserMapper {
 
     public UserEntity mapToUserEntity(final UserDto userDto) {
         return new UserEntity(
-                userDto.getId(),
                 userDto.getUserName(),
-                userDto.getUserSurname(),
-                userDto.getIsBlocked(),
-                userDto.getUserKey()
+                userDto.getUserPassword(),
+                userDto.getUserEmail()
         );
     }
 
     public UserDto mapToUserDto(final UserEntity user) {
         return new UserDto(
-                user.getId(),
+                user.getUserId(),
                 user.getUserName(),
-                user.getUserSurname(),
-                user.getIsBlocked(),
-                user.getUserKey()
+                user.getUserPassword(),
+                user.getUserEmail()
         );
     }
 

@@ -7,10 +7,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserDto {
 
-    private Long id;
+    private Integer id;
     private String userName;
-    private String userSurname;
-    private Boolean isBlocked;
-    private String userKey;
+    private String userPassword;
+    private String userEmail;
 
 }
