@@ -14,7 +14,7 @@ public final class UserEntity {
     private String userPassword;
     private String userEmail;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity = new CartEntity();
+    //private CartEntity cartEntity = new CartEntity();
 
 
 
@@ -41,11 +41,11 @@ public final class UserEntity {
         return orders;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    /*@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "CART_ID")
     public CartEntity getCartEntity() {
         return cartEntity;
-    }
+    }*/
 
     @Column(name = "USER_NAME")
     public String getUserName(){
@@ -66,9 +66,9 @@ public final class UserEntity {
         this.orders = orders;
     }
 
-    public void setCartEntity(CartEntity cartEntity) {
+    /*public void setCartEntity(CartEntity cartEntity) {
         this.cartEntity = cartEntity;
-    }
+    }*/
 
     public void setUserId(int userId) {
         this.userId = userId;

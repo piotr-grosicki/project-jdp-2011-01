@@ -9,11 +9,11 @@ import java.util.List;
 
 @Component
 @Entity
-@Table(name = "cart")
+@Table(name = "CART")
 public final class CartEntity {
     private long cartId;
-    private StubUser stubUser;
-    private List<StubProduct> stubProduct = new ArrayList<>();
+    private UserEntity userEntity;
+    private List<ProductEntity> productEntities = new ArrayList<>();
 
     public CartEntity(long cartId) {
         this.cartId = cartId;
@@ -25,36 +25,36 @@ public final class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "cart_Id", unique = true)
+    @Column(name = "CART_ID", unique = true)
     public long getCartId() {
         return cartId;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "JOIN_ProductEntity_CART",
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+            inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
+    )
+    public List<ProductEntity> getProductEntities() {
+        return productEntities;
     }
 
     public void setCartId(long cartId) {
         this.cartId = cartId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "stub_User_Id")
-    public StubUser getStubUser() {
-        return stubUser;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
-    public void setStubUser(StubUser stubUser) {
-        this.stubUser = stubUser;
-    }
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "JOIN_stubProduct_cart",
-            joinColumns = {@JoinColumn(name = "cart_Id", referencedColumnName = "cart_Id")},
-            inverseJoinColumns = {@JoinColumn(name = "stubProduct_Id", referencedColumnName = "stubProduct_Id")}
-    )
-    public List<StubProduct> getStubProduct() {
-        return stubProduct;
-    }
-
-    public void setStubProduct(List<StubProduct> stubProduct) {
-        this.stubProduct = stubProduct;
+    public void setProductEntities(List<ProductEntity> productEntities) {
+        this.productEntities = productEntities;
     }
 }
 

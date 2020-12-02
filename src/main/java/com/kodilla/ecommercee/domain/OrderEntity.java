@@ -11,7 +11,7 @@ import java.util.List;
 public final class OrderEntity {
 
     private int orderId;
-    private Date dateOfOrder;
+    private Date dateOfOrder = new Date();
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
 
