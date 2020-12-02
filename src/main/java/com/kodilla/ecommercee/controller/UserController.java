@@ -33,10 +33,8 @@ public class UserController {
     }
 
     @RequestMapping(method = POST, value = "/generateKey")
-    public String generateUserKey(@RequestParam String name,
-                                  @RequestParam String surname,
-                                  @RequestParam String password) {
-        return service.generateKey(name, surname, password);
+    public String generateUserKey(@RequestParam Long userId) {
+        return service.generateKey(userId);
     }
 
 }

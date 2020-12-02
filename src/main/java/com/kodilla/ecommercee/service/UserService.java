@@ -33,7 +33,7 @@ public class UserService {
 
     //generates a 16-sign random key
     //user authorization not implemented yet
-    public String generateKey(String name, String surname, String password) {
+    public String generateKey(Long userId) {
         String toHexString = Long.toHexString(new SecureRandom().nextLong());
         return ("0000000000000000" + toHexString).substring(toHexString.length());
     }
