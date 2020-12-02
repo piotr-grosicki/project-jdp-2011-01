@@ -18,26 +18,29 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 public class CartController {
     @Autowired
     private DbCartService cartService;
-    @Autowired
-    private CartEntity cart;
+
     @RequestMapping(method = RequestMethod.POST, value = "createNewCart", consumes = APPLICATION_JSON_VALUE)
-    public void createNewCart (@RequestBody CartDto cartDto) {
+    public void createNewCart(@RequestBody CartDto cartDto) {
         System.out.println("Created new Cart");
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
-    public List<ProductDto> getProductsFromCart (@RequestParam long cartId) {
+    public List<ProductDto> getProductsFromCart(@RequestParam long cartId) {
         return new ArrayList<ProductDto>();
     }
+
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
-    public String addProductToCart (@RequestParam long cartId,@RequestParam long productId) {
+    public String addProductToCart(@RequestParam long cartId, @RequestParam long productId) {
         return "New List of products with added product";
     }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
-    public void deleteProductFromCart (@RequestParam long cartId,@RequestParam long productId) {
+    public void deleteProductFromCart(@RequestParam long cartId, @RequestParam long productId) {
         System.out.println("New List of products without product");
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
-    public OrderDto createOrder (@RequestParam long userId) {
-        return new OrderDto(5L,"Name of order created by CartController", "Order content");
+    public OrderDto createOrder(@RequestParam long userId) {
+        return new OrderDto(5L, "Name of order created by CartController", "Order content");
     }
 }

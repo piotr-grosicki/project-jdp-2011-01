@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DbCartService {
     @Autowired
     private CartRepository repository;
-    public CartEntity createCart (final CartEntity cart) {
+    public CartEntity saveCart (final CartEntity cart) {
         return repository.save(cart);
     }
 }

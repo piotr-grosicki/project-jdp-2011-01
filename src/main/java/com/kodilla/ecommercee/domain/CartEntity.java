@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 @Entity
 @Table(name = "CART")
 public final class CartEntity {
