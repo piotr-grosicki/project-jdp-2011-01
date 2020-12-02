@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public final class OrderEntity {
@@ -16,12 +18,6 @@ public final class OrderEntity {
     private Date orderDate;
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
-
-    public OrderEntity(Date orderDate, List<ProductEntity> products, UserEntity userEntity) {
-        this.orderDate = orderDate;
-        this.products = products;
-        this.userEntity = userEntity;
-    }
 
     @Id
     @GeneratedValue

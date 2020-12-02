@@ -10,6 +10,7 @@ public class OrderMapper {
 
     public OrderEntity mapToOrderEntity(final OrderDto orderDto) {
         return new OrderEntity(
+                orderDto.getOrderId(),
                 orderDto.getOrderDate(),
                 orderDto.getProducts(),
                 orderDto.getUserEntity()
@@ -18,6 +19,7 @@ public class OrderMapper {
 
     public OrderDto mapToOrderDto(final OrderEntity order) {
         return new OrderDto(
+                order.getOrderId(),
                 order.getOrderDate(),
                 order.getProducts(),
                 order.getUserEntity()
@@ -27,6 +29,7 @@ public class OrderMapper {
     public List<OrderDto> mapToOrderDtoList(final List<OrderEntity> orders) {
         return orders.stream()
                 .map(order -> new OrderDto(
+                                order.getOrderId(),
                                 order.getOrderDate(),
                                 order.getProducts(),
                                 order.getUserEntity()
