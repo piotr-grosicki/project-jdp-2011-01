@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,16 +10,18 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 public final class UserEntity {
-    private int userId;
+
+    private Long userId;
     private String userName;
+
     private String userPassword;
     private String userEmail;
     private Boolean isBlocked;
-
     private List<OrderEntity> orders = new ArrayList<>();
-
     private CartEntity cartEntity = new CartEntity();
-    public UserEntity(String userName, String userPassword, String userEmail) {
+
+    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
+        this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
@@ -26,9 +29,9 @@ public final class UserEntity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", unique = true, nullable = false)
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -48,17 +51,17 @@ public final class UserEntity {
     }
 
     @Column(name = "USER_NAME")
-    public String getUserName(){
+    public String getUserName() {
         return userName;
     }
 
     @Column(name = "USER_PASSWORD")
-    public String getUserPassword(){
+    public String getUserPassword() {
         return userPassword;
     }
 
     @Column(name = "USER_EMAIL")
-    public String getUserEmail(){
+    public String getUserEmail() {
         return userEmail;
     }
 
@@ -75,7 +78,7 @@ public final class UserEntity {
         this.cartEntity = cartEntity;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
