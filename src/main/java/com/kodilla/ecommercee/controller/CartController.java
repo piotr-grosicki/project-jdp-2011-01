@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.ProductDto;
