@@ -27,11 +27,11 @@ public class CartController {
         return new ArrayList<>();
     }
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
-    public String addProductToCart (@RequestParam long cartIdId,@RequestParam long productId,@RequestParam double quantity) {
+    public String addProductToCart (@RequestParam long cartId,@RequestParam long productId,@RequestParam double quantity) {
         return "New List of products with added product";
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
-    public void deleteProductFromCart (@RequestParam long cartIdId,@RequestParam long productId) {
+    public void deleteProductFromCart (@RequestParam long cartId,@RequestParam long productId) {
         System.out.println("New List of products without product");
     }
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
