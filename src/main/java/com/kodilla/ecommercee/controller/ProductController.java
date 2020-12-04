@@ -17,16 +17,16 @@ public class ProductController {
     @Autowired
     private ProductMapper productMapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProducts")
-    public List<ProductDto> getProducts(){
+    @GetMapping("getAllProducts")
+    public List<ProductDto> getAllProducts(){
         return productMapper.mapToProductDtoList(service.getAllProducts());
     }
 
-//    @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-//    public ProductDto getProduct(@RequestParam Long productId){
-//        return new ProductDto(1l, "Get name", "get desc", 1);
-//    }
-//
+    @GetMapping("getProduct")
+    public ProductDto getProduct(@RequestParam Long productId) throws ProductNotFoundException {
+        return productMapper.mapToProductDto(service.findById(productId).orElseThrow(ProductNotFoundException::new));
+    }
+
 //    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
 //    public void createProduct(@RequestBody ProductDto productDto){
 //    }
