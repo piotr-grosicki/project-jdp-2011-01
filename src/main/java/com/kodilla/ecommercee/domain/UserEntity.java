@@ -14,17 +14,12 @@ public final class UserEntity {
     private String userPassword;
     private String userEmail;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity = new CartEntity();
-
-
 
     public UserEntity(String userName, String userPassword, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
     }
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID", unique = true, nullable = false)
@@ -39,12 +34,6 @@ public final class UserEntity {
             fetch = FetchType.LAZY)
     public List<OrderEntity> getOrders() {
         return orders;
-    }
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
-    public CartEntity getCartEntity() {
-        return cartEntity;
     }
 
     @Column(name = "USER_NAME")
@@ -64,10 +53,6 @@ public final class UserEntity {
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
-    }
-
-    public void setCartEntity(CartEntity cartEntity) {
-        this.cartEntity = cartEntity;
     }
 
     public void setUserId(int userId) {
