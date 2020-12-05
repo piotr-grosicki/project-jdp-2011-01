@@ -20,12 +20,12 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrder")
     public OrderDto getOrder(@RequestParam Long orderId) {
-        return new OrderDto(1L, "Order number 1", "List of items");
+        return new OrderDto(1L,null, null, null);
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
     public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
-        return new OrderDto(1l, "Updated Order number 1", "Updated list of items");
+        return new OrderDto(1L, null, null, null);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")
