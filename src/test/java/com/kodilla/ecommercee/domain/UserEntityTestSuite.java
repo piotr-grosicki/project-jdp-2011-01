@@ -32,6 +32,12 @@ public class UserEntityTestSuite {
     public void setUp() {
         user1 = new UserEntity("John Smith", "password", "jsmith@gmail.com");
         user2 = new UserEntity("Jackie Brown", "password", "jbrown@gmail.com");
+        try {
+            service.saveUser(user1);
+            service.saveUser(user2);
+        } catch (Exception e) {
+            throw new IllegalStateException("The set-up method in UserEntityTestSuite not executed properly.");
+        }
     }
 
     @After
@@ -48,21 +54,13 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldSaveNewUsers() {
-        //given & when
-        service.saveUser(user1);
-        service.saveUser(user2);
-
-        //then
+        //given & when & then
         assertEquals(2, Iterables.size(repository.findAll()));
     }
 
     @Test
     public void shouldRetrieveSavedUsers() {
-        //given
-        service.saveUser(user1);
-        service.saveUser(user2);
-
-        //when
+        //given & when
         UserEntity retrievedUser1 = service.getUser(user1.getUserId()).orElse(null);
         UserEntity retrievedUser2 = service.getUser(user2.getUserId()).orElse(null);
 
@@ -73,10 +71,7 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldRetrieveBlockedUser() {
-        //given
-        service.saveUser(user1);
-
-        //when
+        //given & when
         service.blockUser(user1.getUserId());
         UserEntity retrievedUser = service.getUser(user1.getUserId()).orElse(user2);
 
@@ -87,10 +82,7 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldReturnBlockedUser() {
-        //given
-        service.saveUser(user1);
-
-        //when
+        //given & when
         UserEntity returnedUser = service.blockUser(user1.getUserId()).orElse(user2);
 
         //then
@@ -100,11 +92,7 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldDeleteUser() {
-        //given
-        service.saveUser(user1);
-        service.saveUser(user2);
-
-        //when
+        //given & when
         repository.deleteById(user1.getUserId());
 
         //then
