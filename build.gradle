@@ -31,5 +31,7 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     annotationProcessor('org.projectlombok:lombok')
     compile('mysql:mysql-connector-java')
+
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
 }
 
