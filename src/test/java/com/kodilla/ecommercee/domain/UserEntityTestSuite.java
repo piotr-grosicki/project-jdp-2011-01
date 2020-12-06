@@ -72,32 +72,6 @@ public class UserEntityTestSuite {
     }
 
     @Test
-    public void shouldDeleteUser() {
-        //given
-        service.saveUser(user1);
-        service.saveUser(user2);
-
-        //when
-        repository.deleteById(user1.getUserId());
-
-        //then
-        assertEquals(1, Iterables.size(repository.findAll()));
-    }
-
-    @Test
-    public void shouldReturnBlockedUser() {
-        //given
-        repository.save(user1);
-
-        //when
-        UserEntity retrievedUser = service.blockUser(user1.getUserId()).orElse(user2);
-
-        //then
-        assertEquals(false, user2.getIsBlocked());
-        assertEquals(true, retrievedUser.getIsBlocked());
-    }
-
-    @Test
     public void shouldRetrieveBlockedUser() {
         //given
         repository.save(user1);
@@ -109,6 +83,32 @@ public class UserEntityTestSuite {
         //then
         assertEquals(false, user2.getIsBlocked());
         assertEquals(true, retrievedUser.getIsBlocked());
+    }
+
+    @Test
+    public void shouldReturnBlockedUser() {
+        //given
+        repository.save(user1);
+
+        //when
+        UserEntity returnedUser = service.blockUser(user1.getUserId()).orElse(user2);
+
+        //then
+        assertEquals(false, user2.getIsBlocked());
+        assertEquals(true, returnedUser.getIsBlocked());
+    }
+
+    @Test
+    public void shouldDeleteUser() {
+        //given
+        service.saveUser(user1);
+        service.saveUser(user2);
+
+        //when
+        repository.deleteById(user1.getUserId());
+
+        //then
+        assertEquals(1, Iterables.size(repository.findAll()));
     }
 
 }
