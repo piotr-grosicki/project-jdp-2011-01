@@ -25,7 +25,7 @@ public class OrderController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
     public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
-        return new OrderDto(1l, null, null, null);
+        return new OrderDto(1L, null, null, null);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteOrder")

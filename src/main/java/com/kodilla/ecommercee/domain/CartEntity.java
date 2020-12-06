@@ -1,7 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
