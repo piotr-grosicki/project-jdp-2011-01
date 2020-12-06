@@ -1,51 +1,37 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.UserDto;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import com.kodilla.ecommercee.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping("v1/user")
 public class UserController {
 
-    private UserDto userDto;
+    private UserService service;
+    private UserMapper mapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getAllUsers")
-    public List<UserDto> getAllUsers(){
-        return new ArrayList<>();
+    @RequestMapping(method = POST, value = "/create", consumes = APPLICATION_JSON_VALUE)
+    public void createUser(@RequestBody UserDto userDto) {
+        service.saveUser(mapper.mapToUserEntity(userDto));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
-    public void createUser(@RequestBody UserDto userDto){
-
+    @RequestMapping(method = PATCH, value = "/block")
+    public UserDto blockUser(@RequestParam Long userId) {
+        return mapper.mapToUserDto(service.blockUser(userId)
+                .orElseThrow(() -> new NoSuchElementException("No user with id " + userId)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUser")
-    public UserDto getUser(@RequestParam Long userId){
-        return new UserDto(1L, "Name", "Surname", false, "123");
+    @RequestMapping(method = POST, value = "/generateKey")
+    public String generateUserKey(@RequestParam Long userId) {
+        return service.generateKey(userId);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
-    public void deleteUserById(@RequestParam Long userId){
-
-    }
-
-    @RequestMapping(method = RequestMethod.PUT, value = "updateUser")
-    public UserDto updateUser(@RequestBody UserDto userDto){
-        return new UserDto(1L, "Name", "Surname", false, "123");
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE, value = "blockUser")
-    public UserDto blockUser(@RequestParam Long userId){
-        return new UserDto(1l, "Name", "Surname", true, "123");
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "createUserKey")
-    public String createUserKey(@RequestParam Long userId) {
-        return "123";
-    }
 }

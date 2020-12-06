@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,26 +10,27 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 public final class UserEntity {
-    private int userId;
+
+    private Long userId;
     private String userName;
+
     private String userPassword;
     private String userEmail;
+    private Boolean isBlocked;
     private List<OrderEntity> orders = new ArrayList<>();
-    private CartEntity cartEntity = new CartEntity();
 
-
-
-    public UserEntity(String userName, String userPassword, String userEmail) {
+    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
+        this.userId = userId;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
+        this.isBlocked = false;
     }
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "USER_ID", unique = true, nullable = false)
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
@@ -41,36 +43,31 @@ public final class UserEntity {
         return orders;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "CART_ID")
-    public CartEntity getCartEntity() {
-        return cartEntity;
-    }
-
     @Column(name = "USER_NAME")
-    public String getUserName(){
+    public String getUserName() {
         return userName;
     }
 
     @Column(name = "USER_PASSWORD")
-    public String getUserPassword(){
+    public String getUserPassword() {
         return userPassword;
     }
 
     @Column(name = "USER_EMAIL")
-    public String getUserEmail(){
+    public String getUserEmail() {
         return userEmail;
+    }
+
+    @Column(name = "BLOCKED")
+    public Boolean getIsBlocked() {
+        return isBlocked;
     }
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
 
-    public void setCartEntity(CartEntity cartEntity) {
-        this.cartEntity = cartEntity;
-    }
-
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -84,5 +81,9 @@ public final class UserEntity {
 
     public void setUserEmail(String userEmail) {
         this.userEmail = userEmail;
+    }
+
+    public void setIsBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 }
