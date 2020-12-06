@@ -36,9 +36,13 @@ public class UserEntityTestSuite {
 
     @After
     public void cleanUp() {
-        List<UserEntity> savedUsers = repository.findAll();
-        for (UserEntity user : savedUsers) {
-            repository.deleteById(user.getUserId());
+        try {
+            List<UserEntity> savedUsers = repository.findAll();
+            for (UserEntity user : savedUsers) {
+                repository.deleteById(user.getUserId());
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("The clean-up method in UserEntityTestSuite not executed properly.");
         }
     }
 
@@ -65,6 +69,19 @@ public class UserEntityTestSuite {
         //then
         assertEquals(user1, retrievedUser1);
         assertEquals(user2, retrievedUser2);
+    }
+
+    @Test
+    public void shouldDeleteUser() {
+        //given
+        service.saveUser(user1);
+        service.saveUser(user2);
+
+        //when
+        repository.deleteById(user1.getUserId());
+
+        //then
+        assertEquals(1, Iterables.size(repository.findAll()));
     }
 
     @Test
