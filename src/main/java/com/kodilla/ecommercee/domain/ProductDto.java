@@ -1,6 +1,5 @@
 package com.kodilla.ecommercee.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -18,6 +17,5 @@ public class ProductDto {
     private List<OrderEntity> orders;
 
     public ProductDto(Long id, String name, String description, double price, GroupEntity group) {
-
     }
 }

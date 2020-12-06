@@ -2,9 +2,11 @@ package com.kodilla.ecommercee.controller;
 
 
 import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.ProductEntity;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,17 +29,25 @@ public class ProductController {
         return productMapper.mapToProductDto(service.findById(productId).orElseThrow(ProductNotFoundException::new));
     }
 
-//    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public void createProduct(@RequestBody ProductDto productDto){
-//    }
-//
-//    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-//    public ProductDto updateProduct (@RequestBody ProductDto productDto){
-//        return new ProductDto(1l, "Update name", "update desc", 1);
-//    }
-//
-//    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-//    public void deleteProduct(@RequestParam Long productId){
-//
-//    }
+    @PostMapping(name = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addProduct(@RequestBody ProductDto productDto){
+        service.addProduct(productMapper.mapToProduct(productDto));
+    }
+
+    @PutMapping("updateProduct")
+    public void updateProduct (@RequestBody ProductDto productDto) throws ProductNotFoundException {
+        ProductEntity editedProduct = service.findById(productDto.getId()).orElseThrow(ProductNotFoundException::new);
+        editedProduct.setName(productDto.getName());
+        editedProduct.setDescription(productDto.getDescription());
+        editedProduct.setPrice(productDto.getPrice());
+        editedProduct.setGroup(productDto.getGroup());
+        editedProduct.setCarts(productDto.getCarts());
+        editedProduct.setOrders(productDto.getOrders());
+        service.addProduct(editedProduct);
+    }
+
+    @DeleteMapping("deleteProduct")
+    public void deleteProduct(@RequestParam Long productId) {
+        service.deleteProduct(productId);
+    }
 }

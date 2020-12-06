@@ -21,20 +21,20 @@ public class ProductMapper {
 
     public ProductDto mapToProductDto(final ProductEntity product) {
         return new ProductDto(
-                product.getProductId(),
-                product.getProductName(),
-                product.getProductDescription(),
-                product.getProductPrice(),
+                product.getId(),
+                product.getName(),
+                product.getDescription(),
+                product.getPrice(),
                 product.getGroup()
         );
     }
 
     public List<ProductDto> mapToProductDtoList(final List<ProductEntity> productEntitiesList) {
         return productEntitiesList.stream()
-                .map(p -> new ProductDto(p.getProductId(),
-                        p.getProductName(),
-                        p.getProductDescription(),
-                        p.getProductPrice(),
+                .map(p -> new ProductDto(p.getId(),
+                        p.getName(),
+                        p.getDescription(),
+                        p.getPrice(),
                         p.getGroup()))
                 .collect(Collectors.toList());
     }

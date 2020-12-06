@@ -20,4 +20,12 @@ public class DbService {
     public Optional<ProductEntity> findById(final Long id) {
         return productRepo.findById(id);
     }
+
+    public void addProduct(ProductEntity newProduct) {
+        productRepo.save(newProduct);
+    }
+
+    public void deleteProduct(final Long productId) {
+        productRepo.deleteById(productId);
+    }
 }
