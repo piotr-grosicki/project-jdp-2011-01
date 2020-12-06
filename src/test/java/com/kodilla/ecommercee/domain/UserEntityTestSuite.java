@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.domain;
 
 import com.google.common.collect.Iterables;
 import com.kodilla.ecommercee.repository.UserRepository;
+import com.kodilla.ecommercee.service.UserService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,10 @@ import static org.junit.Assert.assertEquals;
 public class UserEntityTestSuite {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService service;
+
+    @Autowired
+    private UserRepository repository;
 
     private UserEntity user1;
     private UserEntity user2;
@@ -32,35 +36,62 @@ public class UserEntityTestSuite {
 
     @After
     public void cleanUp() {
-        List<UserEntity> savedUsers = userRepository.findAll();
+        List<UserEntity> savedUsers = repository.findAll();
         for (UserEntity user : savedUsers) {
-            userRepository.deleteById(user.getUserId());
+            repository.deleteById(user.getUserId());
         }
     }
 
     @Test
     public void shouldSaveNewUsers() {
         //given & when
-        userRepository.save(user1);
-        userRepository.save(user2);
+        service.saveUser(user1);
+        service.saveUser(user2);
 
         //then
-        assertEquals(2, Iterables.size(userRepository.findAll()));
+        assertEquals(2, Iterables.size(repository.findAll()));
     }
 
     @Test
     public void shouldRetrieveSavedUsers() {
         //given
-        userRepository.save(user1);
-        userRepository.save(user2);
+        service.saveUser(user1);
+        service.saveUser(user2);
 
         //when
-        UserEntity retrievedUser1 = userRepository.findById(user1.getUserId()).orElse(null);
-        UserEntity retrievedUser2 = userRepository.findById(user2.getUserId()).orElse(null);
+        UserEntity retrievedUser1 = service.getUser(user1.getUserId()).orElse(null);
+        UserEntity retrievedUser2 = service.getUser(user2.getUserId()).orElse(null);
 
         //then
         assertEquals(user1, retrievedUser1);
         assertEquals(user2, retrievedUser2);
+    }
+
+    @Test
+    public void shouldReturnBlockedUser() {
+        //given
+        repository.save(user1);
+
+        //when
+        UserEntity retrievedUser = service.blockUser(user1.getUserId()).orElse(user2);
+
+        //then
+        assertEquals(false, user2.getIsBlocked());
+        assertEquals(true, retrievedUser.getIsBlocked());
+    }
+
+    @Test
+    public void shouldRetrieveBlockedUser() {
+        //given
+        repository.save(user1);
+
+        //when
+        service.blockUser(user1.getUserId());
+        UserEntity retrievedUser = service.getUser(user1.getUserId()).orElse(user2);
+
+        //then
+        assertEquals(false, user2.getIsBlocked());
+        assertEquals(true, retrievedUser.getIsBlocked());
     }
 
 }
