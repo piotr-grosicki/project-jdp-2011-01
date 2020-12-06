@@ -1,6 +1,8 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,14 +15,12 @@ public final class UserEntity {
 
     private Long userId;
     private String userName;
-
     private String userPassword;
     private String userEmail;
     private Boolean isBlocked;
     private List<OrderEntity> orders = new ArrayList<>();
 
-    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
-        this.userId = userId;
+    public UserEntity(String userName, String userPassword, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
@@ -86,4 +86,15 @@ public final class UserEntity {
     public void setIsBlocked(Boolean blocked) {
         isBlocked = blocked;
     }
+
+    @Override
+    public boolean equals(Object that) {
+        return EqualsBuilder.reflectionEquals(this, that, "orders");
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, "orders");
+    }
+
 }
