@@ -74,7 +74,7 @@ public class UserEntityTestSuite {
     @Test
     public void shouldRetrieveBlockedUser() {
         //given
-        repository.save(user1);
+        service.saveUser(user1);
 
         //when
         service.blockUser(user1.getUserId());
@@ -88,7 +88,7 @@ public class UserEntityTestSuite {
     @Test
     public void shouldReturnBlockedUser() {
         //given
-        repository.save(user1);
+        service.saveUser(user1);
 
         //when
         UserEntity returnedUser = service.blockUser(user1.getUserId()).orElse(user2);
