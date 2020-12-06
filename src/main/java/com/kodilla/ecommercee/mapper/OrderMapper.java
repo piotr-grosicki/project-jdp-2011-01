@@ -13,7 +13,7 @@ public class OrderMapper {
                 orderDto.getOrderId(),
                 orderDto.getOrderDate(),
                 orderDto.getProducts(),
-                orderDto.getUserEntity()
+                new UserMapper().mapToUserEntity(orderDto.getUserDto())
         );
     }
 
@@ -22,7 +22,7 @@ public class OrderMapper {
                 order.getOrderId(),
                 order.getOrderDate(),
                 order.getProducts(),
-                order.getUserEntity()
+                new UserMapper().mapToUserDto(order.getUserEntity())
         );
     }
 
@@ -32,7 +32,7 @@ public class OrderMapper {
                                 order.getOrderId(),
                                 order.getOrderDate(),
                                 order.getProducts(),
-                                order.getUserEntity()
+                                new UserMapper().mapToUserDto(order.getUserEntity())
                         )
                 )
                 .collect(Collectors.toList());

@@ -15,7 +15,7 @@ public class OrderDto {
     private Long orderId;
     private Date orderDate;
     private List<ProductEntity> products;
-    private UserEntity userEntity;
+    private UserDto userDto;
 
 }
 

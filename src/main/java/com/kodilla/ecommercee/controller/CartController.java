@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.UserEntity;
+import com.kodilla.ecommercee.mapper.UserMapper;
 import org.springframework.web.bind.annotation.*;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.service.DbCartService;
@@ -45,7 +46,7 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam long userId) {
-        return new OrderDto(1L, new Date(), new ArrayList<>(), new UserEntity());
+        return new OrderDto(1L, new Date(), new ArrayList<>(), new UserMapper().mapToUserDto(new UserEntity()));
     }
 
 }
