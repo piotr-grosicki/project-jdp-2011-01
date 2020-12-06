@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -92,11 +93,17 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldDeleteUser() {
-        //given & when
-        repository.deleteById(user1.getUserId());
+        //given
+        long countSavedUsersBeforeDeletion = Iterables.size(repository.findAll());
+        long deletedUserId = user1.getUserId();
+
+        //when
+        repository.deleteById(deletedUserId);
+        UserEntity deletedUser = service.getUser(deletedUserId).orElse(null);
 
         //then
-        assertEquals(1, Iterables.size(repository.findAll()));
+        assertEquals(countSavedUsersBeforeDeletion - 1, Iterables.size(repository.findAll()));
+        assertNull(deletedUser);
     }
 
 }
