@@ -1,14 +1,14 @@
 package com.kodilla.ecommercee.controller;
 
 
-import com.kodilla.ecommercee.domain.ProductDto;
-import com.kodilla.ecommercee.domain.ProductEntity;
+import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import com.kodilla.ecommercee.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,7 +30,7 @@ public class ProductController {
     }
 
     @PostMapping(name = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addProduct(@RequestBody ProductDto productDto){
+    public void addProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
         service.addProduct(productMapper.mapToProduct(productDto));
     }
 
@@ -40,9 +40,12 @@ public class ProductController {
         editedProduct.setName(productDto.getName());
         editedProduct.setDescription(productDto.getDescription());
         editedProduct.setPrice(productDto.getPrice());
-        editedProduct.setGroup(productDto.getGroup());
-        editedProduct.setCarts(productDto.getCarts());
-        editedProduct.setOrders(productDto.getOrders());
+        GroupEntity group = new GroupEntity();
+        editedProduct.setGroup(group);
+        List<CartEntity> carts = new ArrayList<>();
+        editedProduct.setCarts(carts);
+        List<OrderEntity> orders = new ArrayList<>();
+        editedProduct.setOrders(orders);
         service.addProduct(editedProduct);
     }
 
