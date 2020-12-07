@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.mapper.OrderMapper;
 import com.kodilla.ecommercee.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/v1/order")
 public class OrderController {
 
+    @Autowired
     private OrderService service;
+
+    @Autowired
     private OrderMapper mapper;
 
     @RequestMapping(method = GET, value = "/getAll")

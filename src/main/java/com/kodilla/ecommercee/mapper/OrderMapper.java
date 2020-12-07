@@ -2,10 +2,12 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.OrderEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class OrderMapper {
 
     public OrderEntity mapToOrderEntity(final OrderDto orderDto) {
