@@ -38,8 +38,7 @@ public final class UserEntity {
     @JoinColumn(name = "CART_ID")
     private CartEntity cart = new CartEntity();
 
-    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
-        this.id = userId;
+    public UserEntity(String userName, String userPassword, String userEmail) {
         this.name = userName;
         this.password = userPassword;
         this.email = userEmail;
