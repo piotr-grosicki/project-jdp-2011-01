@@ -19,8 +19,8 @@ public final class UserEntity {
     private Boolean isBlocked;
     private List<OrderEntity> orders = new ArrayList<>();
 
-    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
-        this.userId = userId;
+    public UserEntity(/*Long userId, */String userName, String userPassword, String userEmail) {
+        /*this.userId = userId;*/
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
@@ -37,7 +37,7 @@ public final class UserEntity {
     @OneToMany(
             targetEntity = OrderEntity.class,
             mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
     public List<OrderEntity> getOrders() {
         return orders;

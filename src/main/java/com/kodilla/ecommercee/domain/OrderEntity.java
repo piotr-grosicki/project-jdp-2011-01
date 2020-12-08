@@ -18,20 +18,24 @@ public final class OrderEntity {
     public OrderEntity() {
     }
 
+    public OrderEntity(Date dateOfOrder) {
+        this.dateOfOrder = dateOfOrder;
+    }
+
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID", unique = true, nullable = false)
     public int getOrderId() {
         return orderId;
     }
-
+    @GeneratedValue
     @Column(name = "DATE_OF_ORDER", nullable = false)
     public Date getDateOfOrder() {
         return dateOfOrder;
     }
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany/*(cascade = CascadeType.ALL)*/(fetch = FetchType.LAZY)
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},

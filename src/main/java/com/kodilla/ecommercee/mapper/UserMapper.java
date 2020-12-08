@@ -7,7 +7,7 @@ public class UserMapper {
 
     public UserEntity mapToUserEntity(final UserDto userDto) {
         return new UserEntity(
-                userDto.getId(),
+                /*userDto.getId(),*/
                 userDto.getUserName(),
                 userDto.getUserPassword(),
                 userDto.getUserEmail()
