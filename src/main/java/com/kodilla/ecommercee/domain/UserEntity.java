@@ -13,14 +13,13 @@ public final class UserEntity {
 
     private Long userId;
     private String userName;
-
     private String userPassword;
     private String userEmail;
     private Boolean isBlocked;
     private List<OrderEntity> orders = new ArrayList<>();
+    private CartEntity cart = new CartEntity();
 
-    public UserEntity(Long userId, String userName, String userPassword, String userEmail) {
-        this.userId = userId;
+    public UserEntity( String userName, String userPassword, String userEmail) {
         this.userName = userName;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
