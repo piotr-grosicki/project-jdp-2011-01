@@ -28,6 +28,7 @@ public final class OrderEntity {
     public int getOrderId() {
         return orderId;
     }
+
     @GeneratedValue
     @Column(name = "DATE_OF_ORDER", nullable = false)
     public Date getDateOfOrder() {
@@ -35,15 +36,15 @@ public final class OrderEntity {
     }
 
 
-    @ManyToMany/*(cascade = CascadeType.ALL)*/(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
-            )
-            public List<ProductEntity> getProducts() {
-            return products;
-            }
+    )
+    public List<ProductEntity> getProducts() {
+        return products;
+    }
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")

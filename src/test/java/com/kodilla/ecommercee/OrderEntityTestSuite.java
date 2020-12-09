@@ -28,30 +28,19 @@ public class OrderEntityTestSuite {
     @Autowired
     ProductRepository productRepository;
 
-    private OrderEntity order1;
-    private OrderEntity order2;
-    private OrderEntity order3;
-    private ProductEntity product1;
-    private ProductEntity product2;
-    private ProductEntity product3;
-    private ProductEntity product4;
-    private UserEntity user1;
-    private UserEntity user2;
-    private UserEntity user3;
-
-    @Before
-    public void setUp() {
+    @Test
+    public void shouldCreateAndReadTest() {
         //Given
-        user1 = new UserEntity("userName1", "usersPassword1", "userEmail1");
-        user2 = new UserEntity("userName2", "usersPassword2", "userEmail2");
-        user3 = new UserEntity("userName3", "usersPassword3", "userEmail3");
-        product1 = new ProductEntity("productName1", "productDescription1", 1.0, null);
-        product2 = new ProductEntity("productName2", "productDescription2", 1.0, null);
-        product3 = new ProductEntity("productName3", "productDescription3", 1.0, null);
-        product4 = new ProductEntity("productName4", "productDescription4", 1.0, null);
-        order1 = new OrderEntity();
-        order2 = new OrderEntity();
-        order3 = new OrderEntity();
+        UserEntity user1 = new UserEntity("userName1", "usersPassword1", "userEmail1");
+        UserEntity user2 = new UserEntity("userName2", "usersPassword2", "userEmail2");
+        UserEntity user3 = new UserEntity("userName3", "usersPassword3", "userEmail3");
+        ProductEntity product1 = new ProductEntity("productName1", "productDescription1", 1.0, null);
+        ProductEntity product2 = new ProductEntity("productName2", "productDescription2", 1.0, null);
+        ProductEntity product3 = new ProductEntity("productName3", "productDescription3", 1.0, null);
+        ProductEntity product4 = new ProductEntity("productName4", "productDescription4", 1.0, null);
+        OrderEntity order1 = new OrderEntity();
+        OrderEntity order2 = new OrderEntity();
+        OrderEntity order3 = new OrderEntity();
 
         userRepository.save(user1);
         userRepository.save(user2);
@@ -77,15 +66,6 @@ public class OrderEntityTestSuite {
         orderRepository.save(order1);
         orderRepository.save(order2);
         orderRepository.save(order3);
-    }
-    @After
-    public void cleanUp() {
-        productRepository.deleteAll();
-        userRepository.deleteAll();
-        orderRepository.deleteAll();
-    }
-    @Test
-    public void shouldCreateAndReadTest() {
         //When
         int sizeListOfProductsFromOrder1 = order1.getProducts().size();
         int sizeListOfProductsFromOrder3 = order3.getProducts().size();
@@ -99,7 +79,6 @@ public class OrderEntityTestSuite {
         long sizeOfOrderEntity = orderRepository.count();
         long sizeOfProductEntity = productRepository.count();
         long sizeOfUserEntity = userRepository.count();
-
         //Then
         Assert.assertNotNull(order1);
         Assert.assertEquals(3, sizeListOfProductsFromOrder1);
@@ -110,9 +89,50 @@ public class OrderEntityTestSuite {
         Assert.assertEquals(3, sizeOfOrderEntity);
         Assert.assertEquals(4, sizeOfProductEntity);
         Assert.assertEquals(3, sizeOfUserEntity);
+        //cleanUp
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
     }
+
     @Test
     public void shouldUpdateAndDeleteTest() {
+        //Given
+        UserEntity user1 = new UserEntity("userName1", "usersPassword1", "userEmail1");
+        UserEntity user2 = new UserEntity("userName2", "usersPassword2", "userEmail2");
+        UserEntity user3 = new UserEntity("userName3", "usersPassword3", "userEmail3");
+        ProductEntity product1 = new ProductEntity("productName1", "productDescription1", 1.0, null);
+        ProductEntity product2 = new ProductEntity("productName2", "productDescription2", 1.0, null);
+        ProductEntity product3 = new ProductEntity("productName3", "productDescription3", 1.0, null);
+        ProductEntity product4 = new ProductEntity("productName4", "productDescription4", 1.0, null);
+        OrderEntity order1 = new OrderEntity();
+        OrderEntity order2 = new OrderEntity();
+        OrderEntity order3 = new OrderEntity();
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+        productRepository.save(product4);
+
+        order1.setUserEntity(user1);
+        order1.getProducts().add(product1);
+        order1.getProducts().add(product2);
+        order1.getProducts().add(product3);
+
+        order2.setUserEntity(user2);
+        order2.getProducts().add(product2);
+        order2.getProducts().add(product3);
+        order2.getProducts().add(product4);
+
+        order3.setUserEntity(user3);
+        order3.getProducts().add(product3);
+        order3.getProducts().add(product4);
+        orderRepository.save(order1);
+        orderRepository.save(order2);
+        orderRepository.save(order3);
         //When
         ProductEntity newProduct = new ProductEntity("newProduct", "productDescription", 1.0, null);
         productRepository.save(newProduct);
@@ -142,9 +162,38 @@ public class OrderEntityTestSuite {
         Assert.assertEquals(1, sizeOfOrderEntity);
         Assert.assertEquals(3, sizeOfUserEntity);
         Assert.assertEquals(5, sizeOfProductEntity);
+        //cleanUp
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
     }
+
     @Test
     public void shouldDeleteOrderWhenUserDeleted() {
+        //Given
+        UserEntity user1 = new UserEntity("userName1", "usersPassword1", "userEmail1");
+        UserEntity user2 = new UserEntity("userName2", "usersPassword2", "userEmail2");
+        UserEntity user3 = new UserEntity("userName3", "usersPassword3", "userEmail3");
+        ProductEntity product1 = new ProductEntity("productName1", "productDescription1", 1.0, null);
+        ProductEntity product2 = new ProductEntity("productName2", "productDescription2", 1.0, null);
+        ProductEntity product3 = new ProductEntity("productName3", "productDescription3", 1.0, null);
+        ProductEntity product4 = new ProductEntity("productName4", "productDescription4", 1.0, null);
+        OrderEntity order1 = new OrderEntity();
+
+        userRepository.save(user1);
+        userRepository.save(user2);
+        userRepository.save(user3);
+        productRepository.save(product1);
+        productRepository.save(product2);
+        productRepository.save(product3);
+        productRepository.save(product4);
+
+        order1.setUserEntity(user1);
+        order1.getProducts().add(product1);
+        order1.getProducts().add(product2);
+        order1.getProducts().add(product3);
+        orderRepository.save(order1);
+
         //When
         long user1Id = user1.getUserId();
         userRepository.deleteById(user1Id);
@@ -152,8 +201,12 @@ public class OrderEntityTestSuite {
         long sizeOfProductEntity = productRepository.count();
         long sizeOfUserEntity = userRepository.count();
         //Then
-        Assert.assertEquals(2, sizeOfOrderEntity);
+        Assert.assertEquals(0, sizeOfOrderEntity);
         Assert.assertEquals(2, sizeOfUserEntity);
         Assert.assertEquals(4, sizeOfProductEntity);
+        //cleanUp
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 }
