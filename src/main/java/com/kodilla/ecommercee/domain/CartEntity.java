@@ -14,19 +14,19 @@ public final class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
-    @Column(name = "CART_ID", unique = true)
+    @Column(name = "ID")
     private long id;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "JOIN_ProductEntity_CART",
-            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
+            joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
     )
     private List<ProductEntity> products = new ArrayList<>();
 
-    public CartEntity(long id) {
-        this.id = id;
-    }
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "USER_ID")
+    private UserEntity owner;
 
     public long getId() {
         return id;
@@ -36,12 +36,20 @@ public final class CartEntity {
         return products;
     }
 
+    public UserEntity getOwner() {
+        return owner;
+    }
+
     public void setId(long cartId) {
         this.id = cartId;
     }
 
     public void setProducts(List<ProductEntity> products) {
         this.products = products;
+    }
+
+    public void setOwner(UserEntity owner) {
+        this.owner = owner;
     }
 }
 

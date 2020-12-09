@@ -12,7 +12,7 @@ import java.util.List;
 public final class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "NAME")
@@ -21,7 +21,7 @@ public final class UserEntity {
     @Column(name = "PASSWORD")
     private String password;
 
-    @Column(name = "USER_EMAIL")
+    @Column(name = "EMAIL")
     private String email;
 
     @Column(name = "BLOCKED")
