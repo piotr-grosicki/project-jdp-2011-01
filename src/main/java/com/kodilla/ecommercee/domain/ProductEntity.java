@@ -36,7 +36,7 @@ public final class ProductEntity {
     @JoinColumn(name = "GROUP_ID")
     private GroupEntity group;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "productEntities")
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
     private List<CartEntity> carts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
