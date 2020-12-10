@@ -58,8 +58,8 @@ public class UserEntityTestSuite {
         cleanUp();
 
         //when
-        user1 = new UserEntity("John Smith", "password", "jsmith@gmail.com");
-        user2 = new UserEntity("Jackie Brown", "password", "jbrown@gmail.com");
+        service.saveUser(user1);
+        service.saveUser(user2);
 
         //then
         assertEquals(2, repository.findAll().size());
@@ -72,8 +72,10 @@ public class UserEntityTestSuite {
         UserEntity retrievedUser2 = service.getUser(user2.getId()).orElse(null);
 
         //then
-        assertEquals(user1, retrievedUser1);
-        assertEquals(user2, retrievedUser2);
+        assertEquals(user1.getId(), retrievedUser1 != null ? retrievedUser1.getId() : null);
+        assertEquals(user1.getName(), retrievedUser1 != null ? retrievedUser1.getName() : null);
+        assertEquals(user2.getId(), retrievedUser2 != null ? retrievedUser2.getId() : null);
+        assertEquals(user2.getName(), retrievedUser2 != null ? retrievedUser2.getName() : null);
     }
 
     @Test
