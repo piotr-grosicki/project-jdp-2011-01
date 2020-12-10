@@ -27,7 +27,7 @@ public class ProductDto {
         this.groupId = product.getGroup().getId();
         this.cartIds = product.getCarts()
                 .stream()
-                .map(CartEntity::getCartId)
+                .map(CartEntity::getId)
                 .collect(Collectors.toList());
         this.orderIds = product.getOrders()
                 .stream()

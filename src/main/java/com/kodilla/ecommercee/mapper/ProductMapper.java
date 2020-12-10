@@ -31,7 +31,7 @@ public class ProductMapper {
     public ProductDto mapToProductDto(final ProductEntity product) {
         List<Long> cartIds = product.getCarts()
                 .stream()
-                .map(CartEntity::getCartId)
+                .map(CartEntity::getId)
                 .collect(Collectors.toList());
         List<Long> orderIds = product.getOrders()
                 .stream()
