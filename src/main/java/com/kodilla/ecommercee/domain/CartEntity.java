@@ -27,13 +27,13 @@ public final class CartEntity {
         return cartId;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
     public UserEntity getUserEntity() {
         return userEntity;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "JOIN_ProductEntity_CART",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "CART_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}

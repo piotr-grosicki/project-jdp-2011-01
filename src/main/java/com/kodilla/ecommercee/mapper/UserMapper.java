@@ -1,13 +1,16 @@
 package com.kodilla.ecommercee.mapper;
 
+import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.ProductEntity;
 import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.domain.UserEntity;
+
+import java.util.List;
 
 public class UserMapper {
 
     public UserEntity mapToUserEntity(final UserDto userDto) {
         return new UserEntity(
-                /*userDto.getId(),*/
                 userDto.getUserName(),
                 userDto.getUserPassword(),
                 userDto.getUserEmail()
@@ -23,5 +26,4 @@ public class UserMapper {
                 user.getIsBlocked()
         );
     }
-
 }
