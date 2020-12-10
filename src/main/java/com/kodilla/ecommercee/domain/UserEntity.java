@@ -1,8 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,89 +10,94 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 public final class UserEntity {
-
-    private Long userId;
-    private String userName;
-    private String userPassword;
-    private String userEmail;
-    private Boolean isBlocked;
-    private List<OrderEntity> orders = new ArrayList<>();
-
-    public UserEntity(String userName, String userPassword, String userEmail) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
-        this.isBlocked = false;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID", unique = true, nullable = false)
-    public Long getUserId() {
-        return userId;
-    }
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "PASSWORD")
+    private String password;
+
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "BLOCKED")
+    private Boolean isBlocked;
 
     @OneToMany(
             targetEntity = OrderEntity.class,
             mappedBy = "userEntity",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
-    public List<OrderEntity> getOrders() {
-        return orders;
+    private List<OrderEntity> orders = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CART_ID")
+    private CartEntity cart = new CartEntity();
+
+    public UserEntity(String userName, String userPassword, String userEmail) {
+        this.name = userName;
+        this.password = userPassword;
+        this.email = userEmail;
+        this.isBlocked = false;
     }
 
-    @Column(name = "USER_NAME")
-    public String getUserName() {
-        return userName;
+    public Long getId() {
+        return id;
     }
 
-    @Column(name = "USER_PASSWORD")
-    public String getUserPassword() {
-        return userPassword;
+    public String getName() {
+        return name;
     }
 
-    @Column(name = "USER_EMAIL")
-    public String getUserEmail() {
-        return userEmail;
+    public String getPassword() {
+        return password;
     }
 
-    @Column(name = "BLOCKED")
+    public String getEmail() {
+        return email;
+    }
+
     public Boolean getIsBlocked() {
         return isBlocked;
     }
 
-    public void setOrders(List<OrderEntity> orders) {
-        this.orders = orders;
+    public List<OrderEntity> getOrders() {
+        return orders;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public CartEntity getCart() {
+        return cart;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setIsBlocked(Boolean blocked) {
         isBlocked = blocked;
     }
 
-    @Override
-    public boolean equals(Object that) {
-        return EqualsBuilder.reflectionEquals(this, that, "orders");
+    public void setOrders(List<OrderEntity> orders) {
+        this.orders = orders;
     }
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this, "orders");
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
-
 }
