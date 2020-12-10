@@ -9,7 +9,42 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class GroupEntityTestSuite {
     @Test
-    public void setUp() {
+    public void shouldAddSingleGroup() {
+        //Given
+
+        //When
+
+        //Then
+
+    }
+
+    @Test
+    public void shouldRemoveSingleGroup() {
+        //Given
+
+        //When
+
+        //Then
+
+    }
+
+    @Test
+    public void shouldNotRemoveConnectedProduct() {
+        //Given
+
+        //When
+
+        //Then
+
+    }
+
+    @Test
+    public void shouldNotRemoveAnyOtherEntity() {
+        //Given
+
+        //When
+
+        //Then
 
     }
 }
