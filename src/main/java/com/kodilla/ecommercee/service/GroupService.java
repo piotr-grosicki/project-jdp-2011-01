@@ -23,8 +23,4 @@ public class GroupService {
     public GroupEntity saveProductGroup(final GroupEntity groupEntity) {
         return groupRepository.save(groupEntity);
     }
-
-    public void deleteProductGroup(Long groupId){
-        groupRepository.deleteById(groupId);
-    }
 }
