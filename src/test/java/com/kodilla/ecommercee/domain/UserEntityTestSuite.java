@@ -33,11 +33,8 @@ public class UserEntityTestSuite {
 
     @After
     public void cleanUp() {
-        for (UserEntity user : repository.findAll())
-            repository.deleteById(user.getId());
-
-        for (CartEntity cart : cartRepository.findAll())
-            cartRepository.deleteById(cart.getId());
+        repository.deleteAll();
+        cartRepository.deleteAll();
     }
 
     @Before
