@@ -39,6 +39,7 @@ public class CartEntityTest {
 
     @Test
     public void testSaveReadProductOfCart() {
+        cartRepository.deleteAll();
         //Given
         CartEntity cart1 = new CartEntity();
         CartEntity cart2 = new CartEntity();
@@ -92,7 +93,7 @@ public class CartEntityTest {
         assertEquals("user2@test.com", userEmailOfCart2);
         assertEquals("product1,product1,product2", listOfProductFromCart1);
         assertEquals("product2,product3,product3,product3,product3", listOfProductFromCart2);
-        assertEquals(2, countOfCart);
+        assertEquals(4, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
         assertEquals(3, countOfProduct);
         assertEquals(2, countOfUser);
 
@@ -146,7 +147,7 @@ public class CartEntityTest {
         long countOfUser = userRepository.count();
 
         //Then
-        assertEquals(1, countOfCart);
+        assertEquals(3, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
         assertEquals(2, countOfProduct);
         assertEquals(1, countOfUser);
 
@@ -209,7 +210,7 @@ public class CartEntityTest {
         assertEquals(4, countOfProduct);
         assertEquals(4, sizeCart1);
         assertEquals("newProduct", nameOfUpdateProduct);
-        assertEquals(3, countOfCart);
+        assertEquals(5, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
 
         //Clean up
         productRepository.deleteAll();
