@@ -75,21 +75,19 @@ public class UserEntityTestSuite {
     public void shouldRetrieveBlockedUser() {
         //when
         service.blockUser(user1.getId());
-        UserEntity retrievedUser = service.getUser(user1.getId()).orElse(user2);
+        Optional<UserEntity> retrievedUser = service.getUser(user1.getId());
 
         //then
-        assertEquals(false, user2.getIsBlocked());
-        assertEquals(true, retrievedUser.getIsBlocked());
+        assertEquals(true, retrievedUser.map(UserEntity::getIsBlocked).orElse(false));
     }
 
     @Test
     public void shouldReturnBlockedUser() {
-        //given & when
-        UserEntity returnedUser = service.blockUser(user1.getId()).orElse(user2);
+        //when
+        Optional<UserEntity> returnedUser = service.blockUser(user1.getId());
 
         //then
-        assertEquals(false, user2.getIsBlocked());
-        assertEquals(true, returnedUser.getIsBlocked());
+        assertEquals(true, returnedUser.map(UserEntity::getIsBlocked).orElse(false));
     }
 
 }
