@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.GroupDto;
+import com.kodilla.ecommercee.domain.GroupEntity;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.service.GroupService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class GroupController {
 
     @RequestMapping(method = RequestMethod.GET, value = "getAllGroups")
     public List<GroupDto> getAllGroups(){
-        return groupMapper.maptoProductGroupDtoList(groupService.findAllProductGroups());
+        return groupMapper.maptoProductGroupDtoList(groupService.findAll());
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createGroup", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -33,7 +34,7 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
-    public void updateGroup(@RequestParam Long groupId) {
-        groupService.deleteProductGroup(groupId);
+    public void updateGroup(@RequestBody GroupDto groupDto) {
+        groupService.saveProductGroup(groupMapper.mapToGroup(groupDto));
     }
 }

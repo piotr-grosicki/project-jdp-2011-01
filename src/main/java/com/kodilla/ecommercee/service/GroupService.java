@@ -12,7 +12,7 @@ public class GroupService {
     @Autowired
     private GroupRepository groupRepository;
 
-    public List<GroupEntity> findAllProductGroups() {
+    public List<GroupEntity> findAll() {
         return groupRepository.findAll();
     }
 
