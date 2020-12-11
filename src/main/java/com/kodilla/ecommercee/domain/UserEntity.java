@@ -30,7 +30,7 @@ public final class UserEntity {
     @OneToMany(
             targetEntity = OrderEntity.class,
             mappedBy = "userEntity",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
     private List<OrderEntity> orders = new ArrayList<>();
 
