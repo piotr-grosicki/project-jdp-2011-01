@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.UserService;
 import org.junit.After;
@@ -12,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,8 +25,20 @@ public class UserEntityTestSuite {
     @Autowired
     private UserRepository repository;
 
+    @Autowired
+    private CartRepository cartRepository;
+
     private UserEntity user1;
     private UserEntity user2;
+
+    @After
+    public void cleanUp() {
+        for (UserEntity user : repository.findAll())
+            repository.deleteById(user.getId());
+
+        for (CartEntity cart : cartRepository.findAll())
+            cartRepository.deleteById(cart.getId());
+    }
 
     @Before
     public void setUp() {
@@ -37,12 +50,6 @@ public class UserEntityTestSuite {
         } catch (Exception e) {
             throw new IllegalStateException("The set-up method in UserEntityTestSuite not executed properly.");
         }
-    }
-
-    @After
-    public void cleanUp() {
-        for (UserEntity user : repository.findAll())
-            repository.deleteById(user.getId());
     }
 
     @Test
@@ -88,6 +95,28 @@ public class UserEntityTestSuite {
 
         //then
         assertEquals(true, returnedUser.map(UserEntity::getIsBlocked).orElse(false));
+    }
+
+    @Test
+    public void shouldRetrieveCartOwnedByUser() {
+        //when
+        Optional<CartEntity> retrievedCart = cartRepository.findById(user1.getCart().getId());
+
+        //then
+        assertNotNull(retrievedCart.orElse(null));
+    }
+
+    @Test
+    public void shouldDeleteCartWhenDeletingOwner() {
+        //given
+        long cartId = user1.getCart().getId();
+
+        //when
+        repository.deleteById(user1.getId());
+        Optional<CartEntity> retrievedCart = cartRepository.findById(cartId);
+
+        //then
+        assertNull(retrievedCart.orElse(null));
     }
 
 }
