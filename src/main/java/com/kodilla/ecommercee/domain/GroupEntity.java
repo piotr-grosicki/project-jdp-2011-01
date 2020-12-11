@@ -31,6 +31,9 @@ public final class GroupEntity {
         this.name = name;
     }
 
+    public GroupEntity(Long id, String groupName, List<ProductDto> productDtoList) {
+    }
+
     public Long getId() {
         return id;
     }

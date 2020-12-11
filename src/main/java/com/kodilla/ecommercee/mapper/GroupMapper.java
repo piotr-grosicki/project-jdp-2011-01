@@ -11,14 +11,17 @@ import java.util.stream.Collectors;
 public class GroupMapper {
     public GroupEntity mapToGroup(final GroupDto groupDto) {
         return new GroupEntity(
-                groupDto.getGroupName()
+                groupDto.getId(),
+                groupDto.getGroupName(),
+                groupDto.getProductDtoList()
         );
     }
 
     public GroupDto mapToGroupDto(final GroupEntity groupEntity) {
         return new GroupDto(
                 groupEntity.getId(),
-                groupEntity.getName()
+                groupEntity.getName(),
+                groupEntity.getProducts()
         );
     }
 
