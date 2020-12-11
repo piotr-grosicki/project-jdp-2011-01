@@ -81,7 +81,7 @@ public class UserEntityTestSuite {
         Optional<UserEntity> retrievedUser = service.getUser(user.getId());
 
         //then
-        assertEquals(true, retrievedUser.map(UserEntity::getIsBlocked)
+        assertTrue(retrievedUser.map(UserEntity::getIsBlocked)
                 .orElseThrow(() -> new IllegalStateException("Object retrievedUser is empty.")));
     }
 
@@ -95,7 +95,7 @@ public class UserEntityTestSuite {
         Optional<UserEntity> returnedUser = service.blockUser(user.getId());
 
         //then
-        assertEquals(true, returnedUser.map(UserEntity::getIsBlocked)
+        assertTrue(returnedUser.map(UserEntity::getIsBlocked)
                 .orElseThrow(() -> new IllegalStateException("Object returnedUser is empty.")));
     }
 
