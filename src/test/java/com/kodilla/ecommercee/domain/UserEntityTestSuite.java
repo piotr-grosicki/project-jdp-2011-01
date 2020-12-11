@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
+import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -42,14 +41,8 @@ public class UserEntityTestSuite {
 
     @After
     public void cleanUp() {
-        try {
-            List<UserEntity> savedUsers = repository.findAll();
-            for (UserEntity user : savedUsers) {
-                repository.deleteById(user.getId());
-            }
-        } catch (Exception e) {
-            throw new IllegalStateException("The clean-up method in UserEntityTestSuite not executed properly.");
-        }
+        for (UserEntity user : repository.findAll())
+            repository.deleteById(user.getId());
     }
 
     @Test
@@ -67,20 +60,20 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldRetrieveSavedUsers() {
-        //given & when
-        UserEntity retrievedUser1 = service.getUser(user1.getId()).orElse(null);
-        UserEntity retrievedUser2 = service.getUser(user2.getId()).orElse(null);
+        //when
+        Optional<UserEntity> retrievedUser1 = service.getUser(user1.getId());
+        Optional<UserEntity> retrievedUser2 = service.getUser(user2.getId());
 
         //then
-        assertEquals(user1.getId(), retrievedUser1 != null ? retrievedUser1.getId() : null);
-        assertEquals(user1.getName(), retrievedUser1 != null ? retrievedUser1.getName() : null);
-        assertEquals(user2.getId(), retrievedUser2 != null ? retrievedUser2.getId() : null);
-        assertEquals(user2.getName(), retrievedUser2 != null ? retrievedUser2.getName() : null);
+        assertEquals(user1.getId(), retrievedUser1.map(UserEntity::getId).orElse(null));
+        assertEquals(user1.getName(), retrievedUser1.map(UserEntity::getName).orElse(null));
+        assertEquals(user2.getId(), retrievedUser2.map(UserEntity::getId).orElse(null));
+        assertEquals(user2.getName(), retrievedUser2.map(UserEntity::getName).orElse(null));
     }
 
     @Test
     public void shouldRetrieveBlockedUser() {
-        //given & when
+        //when
         service.blockUser(user1.getId());
         UserEntity retrievedUser = service.getUser(user1.getId()).orElse(user2);
 
@@ -97,21 +90,6 @@ public class UserEntityTestSuite {
         //then
         assertEquals(false, user2.getIsBlocked());
         assertEquals(true, returnedUser.getIsBlocked());
-    }
-
-    @Test
-    public void shouldDeleteUser() {
-        //given
-        long countSavedUsersBeforeDeletion = repository.findAll().size();
-        long deletedUserId = user1.getId();
-
-        //when
-        repository.deleteById(deletedUserId);
-        UserEntity deletedUser = service.getUser(deletedUserId).orElse(null);
-
-        //then
-        assertEquals(countSavedUsersBeforeDeletion - 1, repository.findAll().size());
-        assertNull(deletedUser);
     }
 
 }
