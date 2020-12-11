@@ -4,7 +4,6 @@ import com.kodilla.ecommercee.repository.CartRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
 import com.kodilla.ecommercee.service.UserService;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,31 +27,17 @@ public class UserEntityTestSuite {
     @Autowired
     private CartRepository cartRepository;
 
-    private UserEntity user1;
-    private UserEntity user2;
-
     @After
     public void cleanUp() {
         repository.deleteAll();
         cartRepository.deleteAll();
     }
 
-    @Before
-    public void setUp() {
-        user1 = new UserEntity("John Smith", "password", "jsmith@gmail.com");
-        user2 = new UserEntity("Jackie Brown", "password", "jbrown@gmail.com");
-        try {
-            service.saveUser(user1);
-            service.saveUser(user2);
-        } catch (Exception e) {
-            throw new IllegalStateException("The set-up method in UserEntityTestSuite not executed properly.");
-        }
-    }
-
     @Test
     public void shouldSaveNewUsers() {
         //given
-        cleanUp();
+        UserEntity user1 = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        UserEntity user2 = new UserEntity("Jackie Brown", "password", "jbrown@gmail.com");
 
         //when
         service.saveUser(user1);
@@ -64,56 +49,82 @@ public class UserEntityTestSuite {
 
     @Test
     public void shouldRetrieveSavedUsers() {
+        //given
+        UserEntity user1 = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        UserEntity user2 = new UserEntity("Jackie Brown", "password", "jbrown@gmail.com");
+        service.saveUser(user1);
+        service.saveUser(user2);
+
         //when
         Optional<UserEntity> retrievedUser1 = service.getUser(user1.getId());
         Optional<UserEntity> retrievedUser2 = service.getUser(user2.getId());
 
         //then
-        assertEquals(user1.getId(), retrievedUser1.map(UserEntity::getId).orElse(null));
-        assertEquals(user1.getName(), retrievedUser1.map(UserEntity::getName).orElse(null));
-        assertEquals(user2.getId(), retrievedUser2.map(UserEntity::getId).orElse(null));
-        assertEquals(user2.getName(), retrievedUser2.map(UserEntity::getName).orElse(null));
+        assertEquals(user1.getId(), retrievedUser1.map(UserEntity::getId)
+                .orElseThrow(() -> new IllegalStateException("Object retrievedUser1 is empty.")));
+        assertEquals(user1.getName(), retrievedUser1.map(UserEntity::getName)
+                .orElseThrow(() -> new IllegalStateException("Object retrievedUser1 is empty.")));
+        assertEquals(user2.getId(), retrievedUser2.map(UserEntity::getId)
+                .orElseThrow(() -> new IllegalStateException("Object retrievedUser2 is empty.")));
+        assertEquals(user2.getName(), retrievedUser2.map(UserEntity::getName)
+                .orElseThrow(() -> new IllegalStateException("Object retrievedUser2 is empty.")));
     }
 
     @Test
     public void shouldRetrieveBlockedUser() {
+        //given
+        UserEntity user = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        service.saveUser(user);
+
         //when
-        service.blockUser(user1.getId());
-        Optional<UserEntity> retrievedUser = service.getUser(user1.getId());
+        service.blockUser(user.getId());
+        Optional<UserEntity> retrievedUser = service.getUser(user.getId());
 
         //then
-        assertEquals(true, retrievedUser.map(UserEntity::getIsBlocked).orElse(false));
+        assertEquals(true, retrievedUser.map(UserEntity::getIsBlocked)
+                .orElseThrow(() -> new IllegalStateException("Object retrievedUser is empty.")));
     }
 
     @Test
     public void shouldReturnBlockedUser() {
+        //given
+        UserEntity user = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        service.saveUser(user);
+
         //when
-        Optional<UserEntity> returnedUser = service.blockUser(user1.getId());
+        Optional<UserEntity> returnedUser = service.blockUser(user.getId());
 
         //then
-        assertEquals(true, returnedUser.map(UserEntity::getIsBlocked).orElse(false));
+        assertEquals(true, returnedUser.map(UserEntity::getIsBlocked)
+                .orElseThrow(() -> new IllegalStateException("Object returnedUser is empty.")));
     }
 
     @Test
-    public void shouldRetrieveCartOwnedByUser() {
+    public void shouldRetrieveCartOwnedByNewlyCreatedUser() {
+        //given
+        UserEntity user = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        service.saveUser(user);
+
         //when
-        Optional<CartEntity> retrievedCart = cartRepository.findById(user1.getCart().getId());
+        Optional<CartEntity> retrievedCart = cartRepository.findById(user.getCart().getId());
 
         //then
-        assertNotNull(retrievedCart.orElse(null));
+        assertTrue(retrievedCart.isPresent());
     }
 
     @Test
     public void shouldDeleteCartWhenDeletingOwner() {
         //given
-        long cartId = user1.getCart().getId();
+        UserEntity user = new UserEntity("John Smith", "password", "jsmith@gmail.com");
+        service.saveUser(user);
+        long cartId = user.getCart().getId();
 
         //when
-        repository.deleteById(user1.getId());
+        repository.deleteById(user.getId());
         Optional<CartEntity> retrievedCart = cartRepository.findById(cartId);
 
         //then
-        assertNull(retrievedCart.orElse(null));
+        assertFalse(retrievedCart.isPresent());
     }
 
 }
