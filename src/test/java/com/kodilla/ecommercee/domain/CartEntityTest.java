@@ -29,7 +29,6 @@ public class CartEntityTest {
     @Autowired
     public UserRepository userRepository;
 
-
     @Before
     public void cleanUp() {
         productRepository.deleteAll();
@@ -39,11 +38,6 @@ public class CartEntityTest {
 
     @Test
     public void testSaveReadProductOfCart() {
-        cartRepository.deleteAll();
-        //Given
-        CartEntity cart1 = new CartEntity();
-        CartEntity cart2 = new CartEntity();
-
         UserEntity user1 = new UserEntity("user1", "password1", "user1@test.com");
         UserEntity user2 = new UserEntity("user2", "password2", "user2@test.com");
 
@@ -56,30 +50,26 @@ public class CartEntityTest {
         productRepository.save(product3);
         userRepository.save(user1);
         userRepository.save(user2);
-        cartRepository.save(cart1);
-        cartRepository.save(cart2);
 
-        cart1.setOwner(user1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product2);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product2);
 
-        cart2.setOwner(user2);
-        cart2.getProducts().add(product2);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
+        user2.getCart().getProducts().add(product2);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
 
         //When
-        int sizeListOfProductFromCart1 = cart1.getProducts().size();
-        int sizeListOfProductFromCart2 = cart2.getProducts().size();
-        String userNameOfCart1 = cart1.getOwner().getName();
-        String userEmailOfCart2 = cart2.getOwner().getEmail();
-        String listOfProductFromCart1 = cart1.getProducts().stream()
+        int sizeListOfProductFromCart1 = user1.getCart().getProducts().size();
+        int sizeListOfProductFromCart2 = user2.getCart().getProducts().size();
+        String userNameOfCart1 = user1.getName();
+        String userEmailOfCart2 = user2.getEmail();
+        String listOfProductFromCart1 = user1.getCart().getProducts().stream()
                 .map(ProductEntity::getProductName)
                 .collect(Collectors.joining(","));
-        String listOfProductFromCart2 = cart2.getProducts().stream()
+        String listOfProductFromCart2 = user2.getCart().getProducts().stream()
                 .map(ProductEntity::getProductName)
                 .collect(Collectors.joining(","));
         long countOfCart = cartRepository.count();
@@ -93,22 +83,14 @@ public class CartEntityTest {
         assertEquals("user2@test.com", userEmailOfCart2);
         assertEquals("product1,product1,product2", listOfProductFromCart1);
         assertEquals("product2,product3,product3,product3,product3", listOfProductFromCart2);
-        assertEquals(4, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
+        assertEquals(2, countOfCart);
         assertEquals(3, countOfProduct);
         assertEquals(2, countOfUser);
-
-        //Clean up
-        productRepository.deleteAll();
-        userRepository.deleteAll();
-        cartRepository.deleteAll();
     }
 
     @Test
     public void testDeleteOfCart() {
         //Given
-        CartEntity cart1 = new CartEntity();
-        CartEntity cart2 = new CartEntity();
-
         UserEntity user1 = new UserEntity("user1", "password1", "user1@test.com");
         UserEntity user2 = new UserEntity("user2", "password2", "user2@test.com");
 
@@ -121,49 +103,34 @@ public class CartEntityTest {
         productRepository.save(product3);
         userRepository.save(user1);
         userRepository.save(user2);
-        cartRepository.save(cart1);
-        cartRepository.save(cart2);
 
-        cart1.setOwner(user1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product2);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product2);
 
-        cart2.setOwner(user2);
-        cart2.getProducts().add(product2);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
+        user2.getCart().getProducts().add(product2);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
 
         //When
-        cartRepository.deleteById(cart1.getId());
+        userRepository.deleteById(user1.getId());
+        long countOfUserByDelete = userRepository.count();
         long countOfCart = cartRepository.count();
 
         productRepository.delete(product1);
         long countOfProduct = productRepository.count();
 
-        userRepository.delete(user1);
-        long countOfUser = userRepository.count();
-
         //Then
-        assertEquals(3, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
+        assertEquals(1, countOfUserByDelete);
+        assertEquals(1, countOfCart);
         assertEquals(2, countOfProduct);
-        assertEquals(1, countOfUser);
-
-        //Clean up
-        productRepository.deleteAll();
-        userRepository.deleteAll();
-        cartRepository.deleteAll();
-
     }
 
     @Test
     public void testUpdateOfCart() {
         //Given
-        CartEntity cart1 = new CartEntity();
-        CartEntity cart2 = new CartEntity();
-
         UserEntity user1 = new UserEntity("user1", "password1", "user1@test.com");
         UserEntity user2 = new UserEntity("user2", "password2", "user2@test.com");
 
@@ -176,28 +143,24 @@ public class CartEntityTest {
         productRepository.save(product3);
         userRepository.save(user1);
         userRepository.save(user2);
-        cartRepository.save(cart1);
-        cartRepository.save(cart2);
 
-        cart1.setOwner(user1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product1);
-        cart1.getProducts().add(product2);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product1);
+        user1.getCart().getProducts().add(product2);
 
-        cart2.setOwner(user2);
-        cart2.getProducts().add(product2);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
-        cart2.getProducts().add(product3);
+        user2.getCart().getProducts().add(product2);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
+        user2.getCart().getProducts().add(product3);
 
         //When
         ProductEntity newProduct = new ProductEntity("newProduct", "dsc", 1.0, null);
         productRepository.save(newProduct);
-        cart1.getProducts().add(newProduct);
+        user1.getCart().getProducts().add(newProduct);
         long countOfProduct = productRepository.count();
-        int sizeCart1 = cart1.getProducts().size();
-        String nameOfUpdateProduct = cart1.getProducts().get(3).getProductName();
+        int sizeCartUser1 = user1.getCart().getProducts().size();
+        String nameOfUpdateProduct = user1.getCart().getProducts().get(3).getProductName();
 
         CartEntity newCart = new CartEntity();
         cartRepository.save(newCart);
@@ -205,18 +168,10 @@ public class CartEntityTest {
         newCart.getProducts().add(product1);
         long countOfCart = cartRepository.count();
 
-
         //Then
         assertEquals(4, countOfProduct);
-        assertEquals(4, sizeCart1);
+        assertEquals(4, sizeCartUser1);
         assertEquals("newProduct", nameOfUpdateProduct);
-        assertEquals(5, countOfCart); //dwa tworzą się automatycznie przy tworzeniu nowego użytkownika
-
-        //Clean up
-        productRepository.deleteAll();
-        userRepository.deleteAll();
-        cartRepository.deleteAll();
+        assertEquals(3, countOfCart);
     }
-
-
 }
