@@ -41,14 +41,6 @@ public final class ProductEntity {
     )
     private List<OrderEntity> orders = new ArrayList<>();
 
-    public ProductEntity(Long id, String name, String description, double price, GroupEntity group) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.group = group;
-    }
-
     public ProductEntity(String name, String description, double price, GroupEntity group) {
         this.name = name;
         this.description = description;
