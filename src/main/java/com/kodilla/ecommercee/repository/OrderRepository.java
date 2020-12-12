@@ -8,6 +8,6 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
-public interface OrderRepository extends CrudRepository<OrderEntity, Integer> {
+public interface OrderRepository extends CrudRepository<OrderEntity, Long> {
 
 }
