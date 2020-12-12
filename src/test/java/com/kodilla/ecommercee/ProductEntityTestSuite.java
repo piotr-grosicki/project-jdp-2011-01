@@ -101,7 +101,7 @@ public class ProductEntityTestSuite {
         long newProductOneId = productOne.getProductId();
         int sizeOfProductListFromNewOrder = newOrder.getProducts().size();
 
-        //Than
+        //Then
         Assert.assertEquals(oldProductId, newProductOneId);
         Assert.assertEquals(newProductName, "Updated product");
         Assert.assertNotEquals(oldProductName, newProductName);
@@ -114,5 +114,37 @@ public class ProductEntityTestSuite {
         userRepository.deleteAll();
     }
 
+    @Test
+    public void testDeleteProductById() {
+        //Given
+        UserEntity newUser = new UserEntity("name", "password", "email");
+        OrderEntity newOrder = new OrderEntity(Date.from(Instant.now()));
+        GroupEntity newProductGroup = new GroupEntity("First new product group");
+        ProductEntity productOne = new ProductEntity("First product",
+                "new product - 1", 100, newProductGroup);
+        ProductEntity productTwo = new ProductEntity("First product",
+                "new product - 2", 200, newProductGroup);
 
+        userRepository.save(newUser);
+        groupRepository.save(newProductGroup);
+        productRepository.save(productOne);
+        productRepository.save(productTwo);
+        newOrder.setUserEntity(newUser);
+        newOrder.getProducts().addAll(Arrays.asList(productOne, productTwo));
+        orderRepository.save(newOrder);
+
+        //When
+        Long productToDelete = productOne.getProductId();
+        productRepository.deleteById(productToDelete);
+        ProductEntity deletedProduct = productRepository.findById(productToDelete).orElse(null);
+
+        //Then
+        assertNull(deletedProduct);
+
+        //cleanUp
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
+        userRepository.deleteAll();
+    }
 }
