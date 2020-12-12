@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Entity
-@Table (name = "PRODUCTS")
+@Table(name = "PRODUCTS")
 @NoArgsConstructor
 public final class ProductEntity {
     @Id
@@ -29,7 +29,8 @@ public final class ProductEntity {
     @JoinColumn(name = "GROUP_ID")
     private GroupEntity group;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "products")
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+
     private List<CartEntity> carts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)

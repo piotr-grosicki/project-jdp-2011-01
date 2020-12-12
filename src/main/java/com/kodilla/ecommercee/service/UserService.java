@@ -9,7 +9,7 @@ import java.security.SecureRandom;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class  UserService {
 
     @Autowired
     private UserRepository repository;
