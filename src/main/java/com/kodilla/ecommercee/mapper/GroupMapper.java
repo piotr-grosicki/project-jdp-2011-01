@@ -13,7 +13,7 @@ public class GroupMapper {
         return new GroupEntity(
                 groupDto.getId(),
                 groupDto.getGroupName(),
-                groupDto.getProductDtoList()
+                groupDto.getProducts()
         );
     }
 
@@ -21,7 +21,7 @@ public class GroupMapper {
         return new GroupDto(
                 groupEntity.getId(),
                 groupEntity.getName(),
-                groupEntity.getProducts()
+                groupEntity.getProductDtos()
         );
     }
 
