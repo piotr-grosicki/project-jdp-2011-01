@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class DbService {
+public class ProductService {
     @Autowired
     private ProductRepository productRepo;
 
@@ -21,8 +21,8 @@ public class DbService {
         return productRepo.findById(id);
     }
 
-    public void addProduct(ProductEntity newProduct) {
-        productRepo.save(newProduct);
+    public ProductEntity saveProduct(final ProductEntity newProduct) {
+        return productRepo.save(newProduct);
     }
 
     public void deleteProduct(final Long productId) {

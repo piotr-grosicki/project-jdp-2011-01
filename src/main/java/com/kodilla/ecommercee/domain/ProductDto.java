@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -18,20 +17,4 @@ public class ProductDto {
     private Long groupId;
     private List<Long> cartIds;
     private List<Long> orderIds;
-
-    public ProductDto(ProductEntity product) {
-        this.id = product.getId();
-        this.name = product.getName();
-        this.description = product.getDescription();
-        this.price = product.getPrice();
-        this.groupId = product.getGroup().getId();
-        this.cartIds = product.getCarts()
-                .stream()
-                .map(CartEntity::getId)
-                .collect(Collectors.toList());
-        this.orderIds = product.getOrders()
-                .stream()
-                .map(OrderEntity::getOrderId)
-                .collect(Collectors.toList());
-    }
 }

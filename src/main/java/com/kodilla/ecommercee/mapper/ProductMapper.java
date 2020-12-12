@@ -6,7 +6,6 @@ import com.kodilla.ecommercee.domain.OrderEntity;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
 import com.kodilla.ecommercee.repository.GroupRepository;
-import com.kodilla.ecommercee.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,7 @@ public class ProductMapper {
     @Autowired
     private GroupRepository groupRepo;
 
-    public ProductEntity mapToProduct(final ProductDto dto) throws GroupNotFoundException {
+    public ProductEntity mapToEntity(final ProductDto dto) throws GroupNotFoundException {
         return new ProductEntity(
                 dto.getId(),
                 dto.getName(),
@@ -28,7 +27,7 @@ public class ProductMapper {
         );
     }
 
-    public ProductDto mapToProductDto(final ProductEntity product) {
+    public ProductDto mapToDto(final ProductEntity product) {
         List<Long> cartIds = product.getCarts()
                 .stream()
                 .map(CartEntity::getId)
@@ -48,11 +47,11 @@ public class ProductMapper {
         );
     }
 
-    public List<ProductDto> mapToProductDtoList(final List<ProductEntity> productEntitiesList) {
+    public List<ProductDto> mapToDtoList(final List<ProductEntity> productEntitiesList) {
         ProductMapper mapper = new ProductMapper();
         return productEntitiesList
                 .stream()
-                .map(mapper::mapToProductDto)
+                .map(mapper::mapToDto)
                 .collect(Collectors.toList());
     }
 }
