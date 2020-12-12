@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.domain.GroupDto;
 import com.kodilla.ecommercee.domain.GroupEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ public class GroupMapper {
         return new GroupEntity(
                 groupDto.getId(),
                 groupDto.getGroupName(),
-                groupDto.getProducts()
+                new ArrayList<>()
         );
     }
 
@@ -21,7 +22,7 @@ public class GroupMapper {
         return new GroupDto(
                 groupEntity.getId(),
                 groupEntity.getName(),
-                groupEntity.getProductDtos()
+                new ArrayList<>()
         );
     }
 

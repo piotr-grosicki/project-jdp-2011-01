@@ -13,8 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public final class GroupEntity {
     @Id
-    @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "GROUP_OF_PRODUCTS_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "GROUP_NAME")
