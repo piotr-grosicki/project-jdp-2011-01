@@ -1,21 +1,24 @@
 package com.kodilla.ecommercee;
 
-import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.domain.GroupEntity;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
 import com.kodilla.ecommercee.mapper.ProductMapper;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductEntityTestSuite {
+    @Autowired
+    ProductMapper productMapper;
+
     @Test
     public void shouldConvertEntitiesListToDtoList() {
         //Given
-        ProductMapper mapper = new ProductMapper();
+        productMapper = new ProductMapper();
         GroupEntity group = new GroupEntity("name");
         ProductEntity product1 = new ProductEntity("name1", "description2", 1.0, group);
         ProductEntity product2 = new ProductEntity("name2", "description2", 1.0, group);
@@ -23,7 +26,7 @@ public class ProductEntityTestSuite {
         entitiesList.add(product1);
         entitiesList.add(product2);
         //When
-        List<ProductDto> dtosList = mapper.mapToDtoList(entitiesList);
+        List<ProductDto> dtosList = productMapper.mapToDtoList(entitiesList);
         //Then
         Assert.assertEquals(2, dtosList.size());
         Assert.assertEquals("name2", dtosList.get(1).getName());
