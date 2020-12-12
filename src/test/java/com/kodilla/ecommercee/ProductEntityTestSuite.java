@@ -3,7 +3,11 @@ package com.kodilla.ecommercee;
 import com.kodilla.ecommercee.domain.GroupEntity;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
+import com.kodilla.ecommercee.domain.UserEntity;
 import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.repository.CartRepository;
+import com.kodilla.ecommercee.repository.UserRepository;
+import com.kodilla.ecommercee.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,6 @@ public class ProductEntityTestSuite {
     @Test
     public void shouldConvertEntitiesListToDtoList() {
         //Given
-        productMapper = new ProductMapper();
         GroupEntity group = new GroupEntity("name");
         ProductEntity product1 = new ProductEntity("name1", "description2", 1.0, group);
         ProductEntity product2 = new ProductEntity("name2", "description2", 1.0, group);
