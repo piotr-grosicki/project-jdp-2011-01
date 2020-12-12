@@ -53,4 +53,18 @@ public class ProductMapper {
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
+
+    public List<ProductEntity> mapToEntitiesList(final List<ProductDto> productDtosList) {
+        return productDtosList
+                .stream()
+                .map(dto -> {
+                    try {
+                        return this.mapToEntity(dto);
+                    } catch (GroupNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                })
+                .collect(Collectors.toList());
+    }
 }
