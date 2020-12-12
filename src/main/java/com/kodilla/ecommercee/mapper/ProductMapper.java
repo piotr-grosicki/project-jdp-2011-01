@@ -48,10 +48,9 @@ public class ProductMapper {
     }
 
     public List<ProductDto> mapToDtoList(final List<ProductEntity> productEntitiesList) {
-        ProductMapper mapper = new ProductMapper();
         return productEntitiesList
                 .stream()
-                .map(mapper::mapToDto)
+                .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
 }
