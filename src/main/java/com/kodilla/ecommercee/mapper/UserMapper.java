@@ -4,9 +4,10 @@ import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
 import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.domain.UserEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public class UserMapper {
 
     public UserEntity mapToUserEntity(final UserDto userDto) {

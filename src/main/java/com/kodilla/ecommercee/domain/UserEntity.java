@@ -27,8 +27,8 @@ public final class UserEntity {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO) //LL zmieniono na AUTO
+    @Column(name = "USER_ID", unique = true/*, nullable = false*/) //LL wykasowano nullable
     public Long getUserId() {
         return userId;
     }

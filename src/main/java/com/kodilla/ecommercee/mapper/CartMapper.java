@@ -4,14 +4,14 @@ import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.CartEntity;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Component
 public class CartMapper {
     public CartEntity mapToCartEntity(final CartDto cartDto) {
-        return new CartEntity(
-                cartDto.getCartId());
+        return new CartEntity(cartDto.getUserId());
     }
     public CartDto mapToCartDto (final CartEntity cartEntity) {
         return new CartDto(
