@@ -55,18 +55,12 @@ public class GroupEntityTestSuite {
         ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, testGroup);
         ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, testGroup);
         groupRepo.save(testGroup);
-        System.out.println("===TEST==="+groupRepo.existsById(testGroup.getId()));
         productRepo.save(testProduct1);
         productRepo.save(testProduct2);
         //When
-        assertTrue(productRepo.existsById(testProduct1.getProductId()));
-        assertTrue(productRepo.existsById(testProduct2.getProductId()));
-        System.out.println("===TEST==="+testGroup.getId());
         groupRepo.deleteById(testGroup.getId());
         //Then
-//        ERROR - usuniecie grupy powoduje usuniecie produktu
-//        assertTrue(productRepo.existsById(testProduct.getProductId()));
-        System.out.println("===TEST==="+productRepo.existsById(testProduct1.getProductId()));
-        System.out.println("===TEST==="+productRepo.existsById(testProduct2.getProductId()));
+        assertTrue(productRepo.existsById(testProduct1.getProductId()));
+        assertTrue(productRepo.existsById(testProduct2.getProductId()));
     }
 }
