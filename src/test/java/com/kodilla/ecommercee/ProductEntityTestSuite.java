@@ -134,12 +134,16 @@ public class ProductEntityTestSuite {
         orderRepository.save(newOrder);
 
         //When
+        Long sizeOfGroupEntityBeforeDelete = groupRepository.count();
         Long productToDelete = productOne.getProductId();
         productRepository.deleteById(productToDelete);
         ProductEntity deletedProduct = productRepository.findById(productToDelete).orElse(null);
+        Long sizeOfGroupEntityAfterDelete = groupRepository.count();
 
         //Then
         assertNull(deletedProduct);
+        Assert.assertEquals(sizeOfGroupEntityBeforeDelete, sizeOfGroupEntityAfterDelete);
+        Assert.assertEquals("First new product group", newProductGroup.getName());
 
         //cleanUp
         productRepository.deleteAll();
