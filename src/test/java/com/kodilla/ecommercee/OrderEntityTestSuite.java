@@ -69,7 +69,7 @@ public class OrderEntityTestSuite {
         //When
         int sizeListOfProductsFromOrder1 = order1.getProducts().size();
         int sizeListOfProductsFromOrder3 = order3.getProducts().size();
-        String nameOfUser = order1.getUserEntity().getUserName();
+        String nameOfUser = order1.getUserEntity().getName();
         String nameOfProductsFromOrder1 = order1.getProducts().stream().
                 map(e -> e.getProductName()).
                 collect(Collectors.joining("; "));
@@ -195,7 +195,7 @@ public class OrderEntityTestSuite {
         orderRepository.save(order1);
 
         //When
-        long user1Id = user1.getUserId();
+        long user1Id = user1.getId();
         userRepository.deleteById(user1Id);
         long sizeOfOrderEntity = orderRepository.count();
         long sizeOfProductEntity = productRepository.count();

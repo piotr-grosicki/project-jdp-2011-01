@@ -10,79 +10,95 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 public final class UserEntity {
-
-    private Long userId;
-    private String userName;
-
-    private String userPassword;
-    private String userEmail;
-    private Boolean isBlocked;
-    private List<OrderEntity> orders = new ArrayList<>();
-
-    public UserEntity(String userName, String userPassword, String userEmail) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEmail = userEmail;
-        this.isBlocked = false;
-    }
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO) //LL zmieniono na AUTO
-    @Column(name = "USER_ID", unique = true/*, nullable = false*/) //LL wykasowano nullable
-    public Long getUserId() {
-        return userId;
-    }
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
+    private Long id;
+
+    @Column(name = "NAME")
+    private String name;
+
+    @Column(name = "PASSWORD")
+    private String password;
+
+    @Column(name = "EMAIL")
+    private String email;
+
+    @Column(name = "BLOCKED")
+    private Boolean isBlocked;
+
 
     @OneToMany(
             targetEntity = OrderEntity.class,
             mappedBy = "userEntity",
             cascade = CascadeType.REMOVE,
             fetch = FetchType.LAZY)
+    private List<OrderEntity> orders = new ArrayList<>();
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "CART_ID")
+    private CartEntity cart;
+
+    public UserEntity(String userName, String userPassword, String userEmail) {
+        this.name = userName;
+        this.password = userPassword;
+        this.email = userEmail;
+        this.isBlocked = false;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Boolean getIsBlocked() {
+        return isBlocked;
+    }
+
     public List<OrderEntity> getOrders() {
         return orders;
     }
 
-    @Column(name = "USER_NAME")
-    public String getUserName() {
-        return userName;
+    public CartEntity getCart() {
+        return cart;
     }
 
-    @Column(name = "USER_PASSWORD")
-    public String getUserPassword() {
-        return userPassword;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    @Column(name = "USER_EMAIL")
-    public String getUserEmail() {
-        return userEmail;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Column(name = "BLOCKED")
-    public Boolean getIsBlocked() {
-        return isBlocked;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setIsBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 
     public void setOrders(List<OrderEntity> orders) {
         this.orders = orders;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public void setIsBlocked(Boolean blocked) {
-        isBlocked = blocked;
+    public void setCart(CartEntity cart) {
+        this.cart = cart;
     }
 }

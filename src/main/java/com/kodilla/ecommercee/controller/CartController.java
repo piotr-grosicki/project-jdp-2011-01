@@ -1,9 +1,6 @@
 package com.kodilla.ecommercee.controller;
 
-import com.kodilla.ecommercee.domain.CartDto;
-import com.kodilla.ecommercee.domain.CartEntity;
-import com.kodilla.ecommercee.domain.OrderDto;
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.mapper.CartMapper;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.DbCartService;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
@@ -30,9 +28,12 @@ public class CartController {
     private UserMapper userMapper;
 
 
-    @RequestMapping(method = RequestMethod.POST, value = "createNewCart", consumes = APPLICATION_JSON_VALUE)
-    public void createNewCart(@RequestBody  CartDto cartDto) {
-        cartService.saveCart(cartMapper.mapToCartEntity(cartDto));
+    @RequestMapping(method = RequestMethod.POST, value = "createNewCart"/*, consumes = APPLICATION_JSON_VALUE*/)
+    public void createNewCart(@RequestParam long userId) {
+        Optional<UserEntity> user = userService.getUser(userId);
+        userMapper.mapToUserEntity(user);
+
+        cartService.saveCart(cartMapper.mapToCartEntity());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
