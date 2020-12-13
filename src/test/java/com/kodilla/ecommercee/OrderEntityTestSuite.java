@@ -7,7 +7,6 @@ import com.kodilla.ecommercee.domain.UserEntity;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +26,13 @@ public class OrderEntityTestSuite {
     UserRepository userRepository;
     @Autowired
     ProductRepository productRepository;
+
+    @Before
+    public void cleanUp() {
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
+    }
 
     @Test
     public void shouldCreateAndReadTest() {
