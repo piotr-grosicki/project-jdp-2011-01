@@ -37,7 +37,6 @@ public final class ProductEntity {
     private GroupEntity group;
 
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
-
     private List<CartEntity> carts = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.ALL)
