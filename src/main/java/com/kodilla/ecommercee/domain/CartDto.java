@@ -14,6 +14,5 @@ public class CartDto {
     private long cartId;
     private long userId;
     private List<Long> productId;
-
 }
 

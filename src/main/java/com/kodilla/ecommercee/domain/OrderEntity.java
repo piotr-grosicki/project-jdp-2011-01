@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "ORDERS")
 public final class OrderEntity {
 
-    private int orderId;
+    private long orderId;
     private Date dateOfOrder = new Date();
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
@@ -25,7 +25,7 @@ public final class OrderEntity {
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID", unique = true, nullable = false)
-    public int getOrderId() {
+    public long getOrderId() {
         return orderId;
     }
 
@@ -56,7 +56,7 @@ public final class OrderEntity {
         this.userEntity = userEntity;
     }
 
-    private void setOrderId(int orderId) {
+    private void setOrderId(long orderId) {
         this.orderId = orderId;
     }
 
