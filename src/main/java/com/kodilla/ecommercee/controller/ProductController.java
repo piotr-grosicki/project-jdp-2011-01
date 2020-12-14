@@ -1,40 +1,44 @@
 package com.kodilla.ecommercee.controller;
 
-
-import com.kodilla.ecommercee.domain.ProductDto;
+import com.kodilla.ecommercee.domain.*;
+import com.kodilla.ecommercee.mapper.ProductMapper;
+import com.kodilla.ecommercee.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
+    @Autowired
+    private ProductService service;
+    @Autowired
+    private ProductMapper mapper;
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProducts")
-    public List<ProductDto> getProducts(){
-        return new ArrayList<>();
+    @GetMapping("getAllProducts")
+    public List<ProductDto> getAllProducts(){
+        return mapper.mapToDtoList(service.getAllProducts());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getProduct")
-    public ProductDto getProduct(@RequestParam Long productId){
-        return new ProductDto(1l, "Get name", "get desc", 1);
+    @GetMapping("getProduct")
+    public ProductDto getProduct(@RequestParam Long productId) throws ProductNotFoundException {
+        return mapper.mapToDto(service.findById(productId).orElseThrow(ProductNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "createProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void createProduct(@RequestBody ProductDto productDto){
+    @PostMapping(name = "addProduct", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addProduct(@RequestBody ProductDto productDto) throws GroupNotFoundException {
+        service.saveProduct(mapper.mapToEntity(productDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateProduct")
-    public ProductDto updateProduct (@RequestBody ProductDto productDto){
-        return new ProductDto(1l, "Update name", "update desc", 1);
+    @PutMapping("updateProduct")
+    public ProductDto updateProduct (@RequestBody ProductDto productDto) throws GroupNotFoundException {
+        return mapper.mapToDto(service.saveProduct(mapper.mapToEntity(productDto)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteProduct")
-    public void deleteProduct(@RequestParam Long productId){
-
+    @DeleteMapping("deleteProduct")
+    public void deleteProduct(@RequestParam Long productId) {
+        service.deleteProduct(productId);
     }
-
-
 }
