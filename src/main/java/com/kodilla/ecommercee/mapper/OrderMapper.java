@@ -2,6 +2,7 @@ package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.OrderDto;
 import com.kodilla.ecommercee.domain.OrderEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,12 +11,18 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper {
 
+    @Autowired
+    private ProductMapper productMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
     public OrderEntity mapToOrderEntity(final OrderDto orderDto) {
         return new OrderEntity(
                 orderDto.getOrderId(),
                 orderDto.getOrderDate(),
-                orderDto.getProducts(),
-                new UserMapper().mapToUserEntity(orderDto.getUserDto())
+                productMapper.mapToEntitiesList(orderDto.getProductDtos()),
+                userMapper.mapToUserEntity(orderDto.getUserDto())
         );
     }
 
@@ -23,8 +30,8 @@ public class OrderMapper {
         return new OrderDto(
                 order.getOrderId(),
                 order.getDateOfOrder(),
-                order.getProducts(),
-                new UserMapper().mapToUserDto(order.getUserEntity())
+                productMapper.mapToDtoList(order.getProducts()),
+                userMapper.mapToUserDto(order.getUserEntity())
         );
     }
 
@@ -33,7 +40,7 @@ public class OrderMapper {
                 .map(order -> new OrderDto(
                                 order.getOrderId(),
                                 order.getDateOfOrder(),
-                                order.getProducts(),
+                                productMapper.mapToDtoList(order.getProducts()),
                                 new UserMapper().mapToUserDto(order.getUserEntity())
                         )
                 )
