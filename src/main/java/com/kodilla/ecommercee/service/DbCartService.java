@@ -14,16 +14,15 @@ public class DbCartService {
     @Autowired
     private CartRepository repository;
 
-    public CartEntity saveCart (final CartEntity cart) {
+    public CartEntity saveCart(final CartEntity cart) {
         return repository.save(cart);
     }
-    public List<ProductEntity> getAllProducts (final long cartId) {
+
+    public List<ProductEntity> getAllProducts(final long cartId) {
         return repository.findById(cartId).get().getProducts();
     }
-    public Optional<CartEntity> getCart (final long cartId) {
-        return repository.findById(cartId);
-    }
-    public Optional<CartEntity> deleteCart (final long cartId) {
+
+    public Optional<CartEntity> getCart(final long cartId) {
         return repository.findById(cartId);
     }
 }
