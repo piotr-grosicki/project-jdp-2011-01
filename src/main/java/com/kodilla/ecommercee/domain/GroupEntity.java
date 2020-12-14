@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -8,11 +9,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "GROUPS_OF_PRODUCTS")
+@AllArgsConstructor
 @NoArgsConstructor
 public final class GroupEntity {
+
+    public GroupEntity(String name, List<ProductEntity> products) {
+        this.name = name;
+        this.products = products;
+    }
+
     @Id
-    @Column(name = "GROUP_OF_PRODUCTS_ID", nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "GROUP_OF_PRODUCTS_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "GROUP_NAME")
