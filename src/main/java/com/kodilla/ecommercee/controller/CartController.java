@@ -46,12 +46,13 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
-
     public void addProductToCart(@RequestParam long cartId, @RequestParam long productId) throws ProductNotFoundException, CartNotFoundException {
         List<ProductDto> listOfProductsInCartDto = cartMapper.mapToProductDtoList(cartService.getAllProducts(cartId));
         ProductDto productToAddDto = productMapper.mapToDto(productService.findById(productId).orElseThrow(ProductNotFoundException::new));
         listOfProductsInCartDto.add(productToAddDto);
-        cartService.saveCart(cartService.getCart(cartId).orElseThrow(CartNotFoundException::new));
+        CartEntity cart = cartService.getCart(cartId).orElseThrow(CartNotFoundException::new);
+        cart.setProducts(productMapper.mapToEntitiesList(listOfProductsInCartDto));
+        cartService.saveCart(cart);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
@@ -59,7 +60,9 @@ public class CartController {
         List<ProductDto> listOfProductsInCartDto = cartMapper.mapToProductDtoList(cartService.getAllProducts(cartId));
         ProductDto productToRemoveDto = productMapper.mapToDto(productService.findById(productId).orElseThrow(ProductNotFoundException::new));
         listOfProductsInCartDto.remove(productToRemoveDto);
-        cartService.saveCart(cartService.getCart(cartId).orElseThrow(CartNotFoundException::new));
+        CartEntity cart = cartService.getCart(cartId).orElseThrow(CartNotFoundException::new);
+        cart.setProducts(productMapper.mapToEntitiesList(listOfProductsInCartDto));
+        cartService.saveCart(cart);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
