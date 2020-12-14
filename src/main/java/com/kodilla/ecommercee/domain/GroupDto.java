@@ -11,6 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 public class GroupDto {
     private Long id;
-    private String groupName;
+    private String name;
     private List<ProductDto> productDtos;
 }
