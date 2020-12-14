@@ -3,6 +3,7 @@ package com.kodilla.ecommercee.controller;
 import com.kodilla.ecommercee.domain.UserDto;
 import com.kodilla.ecommercee.mapper.UserMapper;
 import com.kodilla.ecommercee.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -15,7 +16,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("v1/user")
 public class UserController {
 
+    @Autowired
     private UserService service;
+
+    @Autowired
     private UserMapper mapper;
 
     @RequestMapping(method = POST, value = "/create", consumes = APPLICATION_JSON_VALUE)

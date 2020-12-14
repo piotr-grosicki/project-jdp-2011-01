@@ -11,10 +11,12 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderDto {
+
     private Long orderId;
     private Date orderDate;
-    private List<ProductEntity> products;
-    private UserEntity userEntity;
+    private List<ProductDto> productDtos;
+    private UserDto userDto;
+
 }
 
 
