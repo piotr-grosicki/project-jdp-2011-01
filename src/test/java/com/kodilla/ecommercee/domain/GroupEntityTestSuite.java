@@ -78,7 +78,7 @@ public class GroupEntityTestSuite {
         //When
         groupRepo.deleteById(testGroup.getId());
         //Then
-        assertTrue(productRepo.existsById(testProduct1.getProductId()));
-        assertTrue(productRepo.existsById(testProduct2.getProductId()));
+        assertTrue(productRepo.existsById(testProduct1.getId()));
+        assertTrue(productRepo.existsById(testProduct2.getId()));
     }
 }
