@@ -1,16 +1,22 @@
 package com.kodilla.ecommercee.controller;
 
+
 import com.kodilla.ecommercee.domain.*;
 import com.kodilla.ecommercee.mapper.CartMapper;
-import com.kodilla.ecommercee.mapper.OrderMapperStub;
+//import com.kodilla.ecommercee.mapper.OrderMapperStub;
 import com.kodilla.ecommercee.mapper.ProductMapperStub;
 import com.kodilla.ecommercee.mapper.UserMapper;
+
+import com.kodilla.ecommercee.domain.UserEntity;
+
+import org.springframework.web.bind.annotation.*;
+import com.kodilla.ecommercee.domain.ProductDto;
+
 import com.kodilla.ecommercee.service.DbCartService;
 import com.kodilla.ecommercee.service.DbOrderServiceStub;
 import com.kodilla.ecommercee.service.DbProductServiceStub;
 import com.kodilla.ecommercee.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +28,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController {
+
     @Autowired
     private DbCartService cartService;
     @Autowired
@@ -34,8 +41,8 @@ public class CartController {
     private CartMapper cartMapper;
     @Autowired
     private ProductMapperStub productMapperStub;
-    @Autowired
-    private OrderMapperStub orderMapperStub;
+//    @Autowired
+//    private OrderMapperStub orderMapperStub;
     @Autowired
     private UserMapper userMapper;
 
@@ -55,6 +62,7 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
+
     public void addProductToCart(@RequestParam long cartId, @RequestParam long productId) throws ProductNotFoundException {
         List<ProductDto> listOfProductsInCartDto = cartMapper.mapToProductDtoList(cartService.getAllProducts(cartId));
         ProductDto productToAddDto = productMapperStub.mapToProductDto(productServiceStub.getProduct(productId).orElseThrow(ProductNotFoundException::new));
@@ -70,10 +78,13 @@ public class CartController {
         cartService.saveCart(cartService.getCart(cartId).orElseThrow(ProductNotFoundException::new));
     }
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
+
     public void createOrder(@RequestParam long cartId) {
         List<ProductDto> listOfProducts = cartMapper.mapToProductDtoList(cartService.getAllProducts(cartId));
         UserEntity userEntity = cartService.getCart(cartId).get().getOwner();
         UserDto userDto = userMapper.mapToUserDto(userEntity);
         OrderEntity order = new OrderEntity(new Date());
+
     }
+
 }

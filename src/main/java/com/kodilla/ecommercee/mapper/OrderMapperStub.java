@@ -1,3 +1,4 @@
+/*
 package com.kodilla.ecommercee.mapper;
 
 import com.kodilla.ecommercee.domain.OrderDto;
@@ -16,3 +17,4 @@ public class OrderMapperStub {
                 orderEntity.getUserEntity());
     }
 }
+*/

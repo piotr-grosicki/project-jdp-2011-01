@@ -15,8 +15,10 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RestController
 @RequestMapping("v1/user")
 public class UserController {
+
     @Autowired
     private UserService service;
+
     @Autowired
     private UserMapper mapper;
 
