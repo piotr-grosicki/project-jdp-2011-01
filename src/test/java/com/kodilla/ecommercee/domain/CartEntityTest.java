@@ -67,10 +67,10 @@ public class CartEntityTest {
         String userNameOfCart1 = user1.getName();
         String userEmailOfCart2 = user2.getEmail();
         String listOfProductFromCart1 = user1.getCart().getProducts().stream()
-                .map(ProductEntity::getProductName)
+                .map(ProductEntity::getName)
                 .collect(Collectors.joining(","));
         String listOfProductFromCart2 = user2.getCart().getProducts().stream()
-                .map(ProductEntity::getProductName)
+                .map(ProductEntity::getName)
                 .collect(Collectors.joining(","));
         long countOfCart = cartRepository.count();
         long countOfProduct = productRepository.count();
@@ -160,7 +160,7 @@ public class CartEntityTest {
         user1.getCart().getProducts().add(newProduct);
         long countOfProduct = productRepository.count();
         int sizeCartUser1 = user1.getCart().getProducts().size();
-        String nameOfUpdateProduct = user1.getCart().getProducts().get(3).getProductName();
+        String nameOfUpdateProduct = user1.getCart().getProducts().get(3).getName();
 
         CartEntity newCart = new CartEntity();
         cartRepository.save(newCart);
