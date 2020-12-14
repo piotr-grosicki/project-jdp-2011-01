@@ -12,7 +12,9 @@ import java.util.List;
 @Table(name = "ORDERS")
 public final class OrderEntity {
 
+
     private Long orderId;
+
     private Date dateOfOrder = new Date();
     private List<ProductEntity> products = new ArrayList<>();
     private UserEntity userEntity;
@@ -27,7 +29,9 @@ public final class OrderEntity {
     @Id
     @GeneratedValue
     @Column(name = "ORDER_ID", unique = true, nullable = false)
+
     public Long getOrderId() {
+
         return orderId;
     }
 
@@ -58,7 +62,9 @@ public final class OrderEntity {
         this.userEntity = userEntity;
     }
 
+
     private void setOrderId(Long orderId) {
+
         this.orderId = orderId;
     }
 
