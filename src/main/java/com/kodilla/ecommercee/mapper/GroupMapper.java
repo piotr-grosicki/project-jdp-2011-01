@@ -16,6 +16,7 @@ public class GroupMapper {
 
     public GroupEntity mapToGroup(final GroupDto groupDto) {
         return new GroupEntity(
+                groupDto.getId(),
                 groupDto.getName(),
                 productMapper.mapToEntitiesList(groupDto.getProductDtos())
         );
