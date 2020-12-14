@@ -148,9 +148,9 @@ public class OrderEntityTestSuite {
         int sizeListOfProductsFromOrder2 = order2.getProducts().size();
 
         long order3Id = order3.getOrderId();
-        orderRepository.deleteById((int) order3Id);
+        orderRepository.deleteById(order3Id);
         long order2Id = order2.getOrderId();
-        orderRepository.deleteById((int) order2Id);
+        orderRepository.deleteById(order2Id);
         long sizeOfOrderEntity = orderRepository.count();
         long sizeOfProductEntity = productRepository.count();
         long sizeOfUserEntity = userRepository.count();
