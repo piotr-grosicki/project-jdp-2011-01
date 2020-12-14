@@ -2,10 +2,12 @@ package com.kodilla.ecommercee.controller;
 
 import com.kodilla.ecommercee.domain.CartDto;
 import com.kodilla.ecommercee.domain.OrderDto;
+import com.kodilla.ecommercee.domain.UserEntity;
+import com.kodilla.ecommercee.mapper.UserMapper;
+import org.springframework.web.bind.annotation.*;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.service.DbCartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +18,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RestController
 @RequestMapping("/v1/cart")
 public class CartController {
+
     @Autowired
     private DbCartService cartService;
 
@@ -25,27 +28,25 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getProductsFromCart")
-
     public List<ProductDto> getProductsFromCart(@RequestParam long cartId) {
         return new ArrayList<>();
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "addProductToCart")
-
-    public String addProductToCart(@RequestParam long cartId, @RequestParam long productId, @RequestParam double quantity) {
-
+    public String addProductToCart(@RequestParam long cartId,
+                                   @RequestParam long productId,
+                                   @RequestParam double quantity) {
         return "New List of products with added product";
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "deleteProductFromCart")
-
     public void deleteProductFromCart(@RequestParam long cartId, @RequestParam long productId) {
-
         System.out.println("New List of products without product");
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "createOrder")
     public OrderDto createOrder(@RequestParam long userId) {
-        return new OrderDto(5L,new Date(),null,null);
+        return new OrderDto(1L, new Date(), new ArrayList<>(), new UserMapper().mapToUserDto(new UserEntity()));
     }
+
 }

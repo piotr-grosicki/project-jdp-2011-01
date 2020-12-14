@@ -1,11 +1,13 @@
 package com.kodilla.ecommercee.domain;
 
+import lombok.AllArgsConstructor;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@AllArgsConstructor
 @Entity
 @Table(name = "ORDERS")
 public final class OrderEntity {
@@ -35,13 +37,13 @@ public final class OrderEntity {
         return dateOfOrder;
     }
 
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
     )
+
     public List<ProductEntity> getProducts() {
         return products;
     }
@@ -68,3 +70,4 @@ public final class OrderEntity {
         this.products = products;
     }
 }
+

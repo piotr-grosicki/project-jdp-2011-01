@@ -1,9 +1,5 @@
-package com.kodilla.ecommercee;
+package com.kodilla.ecommercee.domain;
 
-import com.kodilla.ecommercee.domain.GroupEntity;
-import com.kodilla.ecommercee.domain.OrderEntity;
-import com.kodilla.ecommercee.domain.ProductEntity;
-import com.kodilla.ecommercee.domain.UserEntity;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
@@ -14,10 +10,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 
 @RunWith(SpringRunner.class)
@@ -38,6 +37,12 @@ public class ProductEntityTestSuite {
 
     @Test
     public void testCreateAndReadProductEntityWithAllConnections() {
+        //cleanUp
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
+        userRepository.deleteAll();
+
         //Given
         UserEntity newUser = new UserEntity("name", "password", "email");
         OrderEntity newOrder = new OrderEntity(Date.from(Instant.now()));
@@ -74,7 +79,6 @@ public class ProductEntityTestSuite {
         orderRepository.deleteAll();
         userRepository.deleteAll();
     }
-
 
     @Test
     public void testUpdateProductEntityWithAllConnections() {
