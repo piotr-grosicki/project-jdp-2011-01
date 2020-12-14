@@ -25,4 +25,8 @@ public class DbCartService {
     public Optional<CartEntity> getCart(final long cartId) {
         return repository.findById(cartId);
     }
+
+    public void deleteCart (final CartEntity cart) {
+        repository.delete(cart);
+    }
 }

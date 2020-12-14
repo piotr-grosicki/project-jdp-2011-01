@@ -19,7 +19,7 @@ public final class CartEntity {
     @Column(name = "ID")
     private long id;
 
-   @ManyToMany(cascade = CascadeType.DETACH)
+   @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "JOIN_ProductEntity_CART",
             joinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
