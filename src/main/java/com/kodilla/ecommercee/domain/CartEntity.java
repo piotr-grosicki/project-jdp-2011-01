@@ -24,8 +24,7 @@ public final class CartEntity {
     )
     private List<ProductEntity> products = new ArrayList<>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "USER_ID")
+    @OneToOne(mappedBy = "cart")
     private UserEntity owner;
 
     public long getId() {
