@@ -33,7 +33,7 @@ public class GroupController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateGroup")
-    public void updateGroup(@RequestBody GroupDto groupDto) {
-        groupService.saveProductGroup(groupMapper.mapToGroup(groupDto));
+    public GroupDto updateGroup(@RequestBody GroupDto groupDto) {
+        return groupMapper.mapToGroupDto(groupService.saveProductGroup(groupMapper.mapToGroup(groupDto)));
     }
 }
