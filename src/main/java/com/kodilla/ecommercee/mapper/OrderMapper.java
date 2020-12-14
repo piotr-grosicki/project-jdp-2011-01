@@ -22,7 +22,7 @@ public class OrderMapper {
     public OrderDto mapToOrderDto(final OrderEntity order) {
         return new OrderDto(
                 order.getOrderId(),
-                order.getOrderDate(),
+                order.getDateOfOrder(),
                 order.getProducts(),
                 new UserMapper().mapToUserDto(order.getUserEntity())
         );
@@ -32,7 +32,7 @@ public class OrderMapper {
         return orders.stream()
                 .map(order -> new OrderDto(
                                 order.getOrderId(),
-                                order.getOrderDate(),
+                                order.getDateOfOrder(),
                                 order.getProducts(),
                                 new UserMapper().mapToUserDto(order.getUserEntity())
                         )

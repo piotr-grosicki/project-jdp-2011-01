@@ -8,9 +8,9 @@ import lombok.Getter;
 public class UserDto {
 
     private Long id;
-    private String userName;
-    private String userPassword;
-    private String userEmail;
+    private String name;
+    private String password;
+    private String email;
     private Boolean isBlocked;
 
 }
