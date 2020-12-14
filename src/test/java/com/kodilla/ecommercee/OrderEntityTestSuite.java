@@ -7,7 +7,6 @@ import com.kodilla.ecommercee.domain.UserEntity;
 import com.kodilla.ecommercee.repository.OrderRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import com.kodilla.ecommercee.repository.UserRepository;
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +26,13 @@ public class OrderEntityTestSuite {
     UserRepository userRepository;
     @Autowired
     ProductRepository productRepository;
+
+    @Before
+    public void cleanUp() {
+        productRepository.deleteAll();
+        userRepository.deleteAll();
+        orderRepository.deleteAll();
+    }
 
     @Test
     public void shouldCreateAndReadTest() {
@@ -71,10 +77,10 @@ public class OrderEntityTestSuite {
         int sizeListOfProductsFromOrder3 = order3.getProducts().size();
         String nameOfUser = order1.getUserEntity().getName();
         String nameOfProductsFromOrder1 = order1.getProducts().stream().
-                map(e -> e.getProductName()).
+                map(e -> e.getName()).
                 collect(Collectors.joining("; "));
         String nameOfProductsFromOrder3 = order3.getProducts().stream().
-                map(e -> e.getProductName()).
+                map(e -> e.getName()).
                 collect(Collectors.joining("; "));
         long sizeOfOrderEntity = orderRepository.count();
         long sizeOfProductEntity = productRepository.count();
@@ -139,18 +145,18 @@ public class OrderEntityTestSuite {
         order1.getProducts().add(newProduct);
         orderRepository.save(order1);
         int sizeListOfProductsFromOrder1 = order1.getProducts().size();
-        String nameOfUpdatedProduct = order1.getProducts().get(sizeListOfProductsFromOrder1 - 1).getProductName();
+        String nameOfUpdatedProduct = order1.getProducts().get(sizeListOfProductsFromOrder1 - 1).getName();
 
         order2.getProducts().remove(0);
         order2.getProducts().add(0, newProduct);
         orderRepository.save(order2);
-        String nameOfUpdatedProductFromOrder2 = order2.getProducts().get(0).getProductName();
+        String nameOfUpdatedProductFromOrder2 = order2.getProducts().get(0).getName();
         int sizeListOfProductsFromOrder2 = order2.getProducts().size();
 
         long order3Id = order3.getOrderId();
-        orderRepository.deleteById((int) order3Id);
+        orderRepository.deleteById((long) order3Id);
         long order2Id = order2.getOrderId();
-        orderRepository.deleteById((int) order2Id);
+        orderRepository.deleteById((long) order2Id);
         long sizeOfOrderEntity = orderRepository.count();
         long sizeOfProductEntity = productRepository.count();
         long sizeOfUserEntity = userRepository.count();
