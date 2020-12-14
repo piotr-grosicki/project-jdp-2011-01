@@ -1,7 +1,5 @@
 package com.kodilla.ecommercee.mapper;
 
-import com.kodilla.ecommercee.domain.CartEntity;
-import com.kodilla.ecommercee.domain.OrderEntity;
 import com.kodilla.ecommercee.domain.ProductDto;
 import com.kodilla.ecommercee.domain.ProductEntity;
 import org.springframework.stereotype.Component;
