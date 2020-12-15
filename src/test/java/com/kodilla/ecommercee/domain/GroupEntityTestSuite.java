@@ -1,5 +1,6 @@
 package com.kodilla.ecommercee.domain;
 
+import com.kodilla.ecommercee.controller.GroupController;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.junit.Test;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -18,38 +22,29 @@ public class GroupEntityTestSuite {
     @Autowired
     GroupRepository groupRepo;
     @Autowired
+    GroupController groupController;
+    @Autowired
+    GroupMapper groupMapper;
+    @Autowired
     ProductRepository productRepo;
 
     @Test
-    public void groupEntityGeneratesId() {
+    public void groupEntitySettersAndGettersTest() {
         //Given
-        groupRepo.deleteAll();
-        GroupEntity testGroup1 = new GroupEntity("test name");
-        GroupEntity testGroup2 = new GroupEntity("test name");
+        GroupEntity testGroup = new GroupEntity("test name");
+        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
+        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
+        List<ProductEntity> productsList = new ArrayList<>(Arrays.asList(testProduct1, testProduct2));
         //When
-        groupRepo.save(testGroup1);
-        groupRepo.save(testGroup2);
+        testGroup.setName("another name");
+        testGroup.setProducts(productsList);
         //Then
-        assertTrue(testGroup1.getId() != null && testGroup2.getId() != null);
-        assertNotEquals(testGroup1.getId(), testGroup2.getId());
+        assertEquals("another name", testGroup.getName());
+        assertEquals(2, testGroup.getProducts().size());
     }
 
-//    @Test
-//    public void groupEntitySettersAndGettersTest() {
-//        //Given
-//        groupRepo.deleteAll();
-//        GroupEntity testGroup = new GroupEntity("test name");
-//        groupRepo.save(testGroup);
-//        Long id = testGroup.getId();
-//        //When
-//        groupRepo.findById(id).ifPresent(group -> System.out.println("TEST: "+group.getTest().toString()));
-//        groupRepo.findById(id).ifPresent(group -> System.out.println("TEST: "+(group.getTest()!=null)));
-//        //Then
-//
-//    }
-
     @Test
-    public void shouldCreateAndReadSingleGroup() {
+    public void shouldSaveAndReadSingleGroup() {
         //Given
         groupRepo.deleteAll();
         GroupEntity testGroup = new GroupEntity("test name");
@@ -71,9 +66,12 @@ public class GroupEntityTestSuite {
         Long id = testGroup.getId();
         String entryName = "test name";
         //When
-        testGroup.setName("another name");
-        testProduct1.setGroup(testGroup);
-        testProduct2.setGroup(testGroup);
+        Optional<GroupEntity> retrievedGroup = groupRepo.findById(id);
+        GroupDto retrievedGroupDto;
+        retrievedGroup.ifPresent(g -> retrievedGroupDto = );
+//                groupController.updateGroup();
+//        testProduct1.setGroup(testGroup);
+//        testProduct2.setGroup(testGroup);
         testGroup.getProducts();
         //Then
         Optional<GroupEntity> receivedGroup = groupRepo.findById(id);
@@ -93,23 +91,45 @@ public class GroupEntityTestSuite {
         assertFalse(groupRepo.existsById(testGroup.getId()));
     }
 
-    @Test
-    public void shouldNotRemoveConnectedProducts() {
-        //Given
-        groupRepo.deleteAll();
-        productRepo.deleteAll();
-        GroupEntity testGroup = new GroupEntity("test name");
-        groupRepo.save(testGroup);
-        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
-        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
-        testProduct1.setGroup(testGroup);
-        testProduct2.setGroup(testGroup);
-        productRepo.save(testProduct1);
-        productRepo.save(testProduct2);
-        //When
+//    @Test
+//    public void shouldUpdateConnectedProducts() {
+//        //Given
+//        groupRepo.deleteAll();
+//        productRepo.deleteAll();
+//        GroupEntity testGroup = new GroupEntity("test name");
+//        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, testGroup);
+//        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, testGroup);
+//        groupRepo.save(testGroup);
+//        productRepo.save(testProduct1);
+//        productRepo.save(testProduct2);
+//        //When
+//        testProduct1.setName("another name");
+//        Optional<ProductEntity> renamedProduct = productRepo.findById(testProduct1.getId());
+//        renamedProduct.ifPresent(p -> p.setName("another name"));
+//        //Then
+//        Optional<GroupEntity> group = groupRepo.findById(testGroup.getId());
+//        group.ifPresent(g -> g.getProducts().forEach(e-> System.out.println(e.getName())));
+////        group.ifPresent(g ->
+////                assertTrue(g.getProducts().stream().anyMatch(p -> p.getName().equals("another name"))));
+//    }
+
+//    @Test
+//    public void shouldRemoveConnectedProducts() {
+//        //Given
+//        groupRepo.deleteAll();
+//        productRepo.deleteAll();
+//        GroupEntity testGroup = new GroupEntity("test name");
+//        groupRepo.save(testGroup);
+//        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
+//        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
+//        testProduct1.setGroup(testGroup);
+//        testProduct2.setGroup(testGroup);
+//        productRepo.save(testProduct1);
+//        productRepo.save(testProduct2);
+//        //When
 //        groupRepo.deleteById(testGroup.getId());
-        //Then
-        assertTrue(productRepo.existsById(testProduct1.getId()));
-        assertTrue(productRepo.existsById(testProduct2.getId()));
-    }
+//        //Then
+//        assertFalse(productRepo.existsById(testProduct1.getId()));
+//        assertFalse(productRepo.existsById(testProduct2.getId()));
+//    }
 }
