@@ -1,6 +1,7 @@
 package com.kodilla.ecommercee.domain;
 
 import com.kodilla.ecommercee.controller.GroupController;
+import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
 import org.junit.Test;
@@ -59,24 +60,25 @@ public class GroupEntityTestSuite {
     @Test
     public void shouldUpdateExistingGroup() {
         //Given
+        groupRepo.deleteAll();
+        productRepo.deleteAll();
         GroupEntity testGroup = new GroupEntity("test name");
         ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
         ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
         groupRepo.save(testGroup);
         Long id = testGroup.getId();
-        String entryName = "test name";
+        String secondName = "new name";
         //When
+        testProduct1.setGroup(testGroup);
+        testProduct2.setGroup(testGroup);
+        productRepo.save(testProduct1);
+        productRepo.save(testProduct2);
+        testGroup.setName(secondName);
+        groupRepo.save(testGroup);
         Optional<GroupEntity> retrievedGroup = groupRepo.findById(id);
-        GroupDto retrievedGroupDto;
-        retrievedGroup.ifPresent(g -> retrievedGroupDto = );
-//                groupController.updateGroup();
-//        testProduct1.setGroup(testGroup);
-//        testProduct2.setGroup(testGroup);
-        testGroup.getProducts();
         //Then
-        Optional<GroupEntity> receivedGroup = groupRepo.findById(id);
-        assertTrue(receivedGroup.isPresent());
-        receivedGroup.ifPresent(group -> assertEquals("another name", group.getName()));
+        retrievedGroup.ifPresent(g -> assertEquals(2, g.getProducts().size()));
+        retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
     }
 
     @Test
