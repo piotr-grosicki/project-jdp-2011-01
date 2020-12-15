@@ -8,5 +8,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Repository
+
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
+
 }
