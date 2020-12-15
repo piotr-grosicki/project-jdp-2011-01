@@ -33,21 +33,6 @@ public class GroupEntityTestSuite {
     GroupService groupService;
 
     @Test
-    public void groupEntitySettersAndGettersTest() {
-        //Given
-        GroupEntity testGroup = new GroupEntity("test name");
-        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
-        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
-        List<ProductEntity> productsList = new ArrayList<>(Arrays.asList(testProduct1, testProduct2));
-        //When
-        testGroup.setName("another name");
-        testGroup.setProducts(productsList);
-        //Then
-        assertEquals("another name", testGroup.getName());
-        assertEquals(2, testGroup.getProducts().size());
-    }
-
-    @Test
     public void shouldSaveAndReadSingleGroupTest() {
         //Given
         groupRepo.deleteAll();
@@ -88,11 +73,18 @@ public class GroupEntityTestSuite {
     public void shouldRemoveSingleGroup() {
         //Given
         groupRepo.deleteAll();
+        productRepo.deleteAll();
         GroupEntity testGroup = new GroupEntity("test name");
+        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, testGroup);
+        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, testGroup);
         groupRepo.save(testGroup);
+        productRepo.save(testProduct1);
+        productRepo.save(testProduct2);
         //When
         groupRepo.deleteById(testGroup.getId());
         //Then
         assertFalse(groupRepo.existsById(testGroup.getId()));
+        assertFalse(productRepo.existsById(testProduct1.getId()));
+        assertFalse(productRepo.existsById(testProduct2.getId()));
     }
 }
