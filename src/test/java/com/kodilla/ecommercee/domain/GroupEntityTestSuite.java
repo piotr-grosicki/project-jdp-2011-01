@@ -78,11 +78,10 @@ public class GroupEntityTestSuite {
         productRepo.save(testProduct2);
         testGroup.setName(secondName);
         groupRepo.save(testGroup);
-        Optional<GroupEntity> retrievedGroup = groupRepo.findById(id);
         //Then
         GroupEntity groupFromService = groupService.findGroupById(id);
 //        retrievedGroup.ifPresent(g -> assertEquals(2, g.getProducts().size()));
-        assertEquals(2, groupFromService.getProducts().size();
+        assertEquals(2, groupFromService.getProducts().size());
 //        retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
         assertEquals(secondName, groupFromService.getName());
     }
