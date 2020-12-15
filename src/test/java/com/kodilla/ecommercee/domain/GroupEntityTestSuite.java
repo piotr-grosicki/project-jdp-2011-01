@@ -60,31 +60,31 @@ public class GroupEntityTestSuite {
         receivedGroup.ifPresent(group -> assertEquals("test name", group.getName()));
     }
 
-    @Test
-    public void shouldUpdateExistingGroupTest() {
-        //Given
-        groupRepo.deleteAll();
-        productRepo.deleteAll();
-        GroupEntity testGroup = new GroupEntity("test name");
-        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
-        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
-        groupRepo.save(testGroup);
-        Long id = testGroup.getId();
-        String secondName = "new name";
-        //When
-        testProduct1.setGroup(testGroup);
-        testProduct2.setGroup(testGroup);
-        productRepo.save(testProduct1);
-        productRepo.save(testProduct2);
-        testGroup.setName(secondName);
-        groupRepo.save(testGroup);
-        //Then
-        GroupDto retrievedGrupDto = groupMapper.mapToGroupDto(groupService.findGroupById(id));
-        String retrievedName = retrievedGrupDto.getName();
-        int retrievedProductsQuantity = retrievedGrupDto.getProductDtos().size();
-        assertEquals(2, retrievedProductsQuantity);
-        assertEquals(secondName, retrievedName);
-    }
+//    @Test
+//    public void shouldUpdateExistingGroupTest() {
+//        //Given
+//        groupRepo.deleteAll();
+//        productRepo.deleteAll();
+//        GroupEntity testGroup = new GroupEntity("test name");
+//        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
+//        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
+//        groupRepo.save(testGroup);
+//        Long id = testGroup.getId();
+//        String secondName = "new name";
+//        //When
+//        testProduct1.setGroup(testGroup);
+//        testProduct2.setGroup(testGroup);
+//        productRepo.save(testProduct1);
+//        productRepo.save(testProduct2);
+//        testGroup.setName(secondName);
+//        groupRepo.save(testGroup);
+//        //Then
+//        GroupDto retrievedGrupDto = groupMapper.mapToGroupDto(groupService.findGroupById(id));
+//        String retrievedName = retrievedGrupDto.getName();
+//        int retrievedProductsQuantity = retrievedGrupDto.getProductDtos().size();
+//        assertEquals(2, retrievedProductsQuantity);
+//        assertEquals(secondName, retrievedName);
+//    }
 
     @Test
     public void shouldRemoveSingleGroup() {
