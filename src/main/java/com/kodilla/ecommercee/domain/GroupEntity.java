@@ -31,7 +31,7 @@ public final class GroupEntity {
             targetEntity = ProductEntity.class,
             mappedBy = "group",
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<ProductEntity> products = new ArrayList<>();
 
