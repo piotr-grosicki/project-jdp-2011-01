@@ -14,9 +14,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.Instant;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 
 @RunWith(SpringRunner.class)
@@ -127,28 +127,31 @@ public class ProductEntityTestSuite {
         OrderEntity newOrder = new OrderEntity(Date.from(Instant.now()));
         GroupEntity newProductGroup = new GroupEntity("First new product group");
         ProductEntity productOne = new ProductEntity("First product",
-                "new product - 1", 100, newProductGroup);
+                "new product - 1", 100, null);
         ProductEntity productTwo = new ProductEntity("First product",
-                "new product - 2", 200, newProductGroup);
+                "new product - 2", 200, null);
 
         userRepository.save(newUser);
         groupRepository.save(newProductGroup);
+        System.out.println(productOne.getId());
         productRepository.save(productOne);
+        System.out.println(productOne.getId());
         productRepository.save(productTwo);
         newOrder.setUserEntity(newUser);
         newOrder.getProducts().addAll(Arrays.asList(productOne, productTwo));
         orderRepository.save(newOrder);
 
         //When
-        Long sizeOfGroupEntityBeforeDelete = groupRepository.count();
-        Long productToDelete = productOne.getId();
-        productRepository.deleteById(productToDelete);
-        ProductEntity deletedProduct = productRepository.findById(productToDelete).orElse(null);
-        Long sizeOfGroupEntityAfterDelete = groupRepository.count();
+        int sizeOfGroupEntityBeforeDelete = groupRepository.findAll().size();
+        productRepository.deleteById(productOne.getId());
+//        productRepository.deleteAll();
+//        System.out.println("TEST: "+productRepository.findAll().size());
+//        ProductEntity deletedProduct = productRepository.findById(productToDelete).orElse(null);
 
+        int sizeOfGroupEntityAfterDelete = groupRepository.findAll().size();
         //Then
-        assertNull(deletedProduct);
-        Assert.assertEquals(sizeOfGroupEntityBeforeDelete, sizeOfGroupEntityAfterDelete);
+        assertFalse(productRepository.existsById(productOne.getId()));
+        assertEquals(sizeOfGroupEntityBeforeDelete, sizeOfGroupEntityAfterDelete);
         Assert.assertEquals("First new product group", newProductGroup.getName());
 
         //cleanUp

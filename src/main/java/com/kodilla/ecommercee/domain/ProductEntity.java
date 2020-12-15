@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public final class ProductEntity {
     @Id
-    @Column(name = "PRODUCT_ID", nullable = false, unique = true)
+    @Column(name = "PRODUCT_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
