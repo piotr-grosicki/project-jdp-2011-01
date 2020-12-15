@@ -84,7 +84,6 @@ public class GroupEntityTestSuite {
 //        retrievedGroup.ifPresent(g -> assertEquals(2, g.getProducts().size()));
         assertEquals(2, groupFromService.getProducts().size();
         retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
-        groupService.findGroupById()
     }
 
     @Test
