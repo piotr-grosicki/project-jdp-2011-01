@@ -79,11 +79,11 @@ public class GroupEntityTestSuite {
         testGroup.setName(secondName);
         groupRepo.save(testGroup);
         //Then
-        GroupEntity groupFromService = groupService.findGroupById(id);
-//        retrievedGroup.ifPresent(g -> assertEquals(2, g.getProducts().size()));
-        assertEquals(2, groupFromService.getProducts().size());
-//        retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
-        assertEquals(secondName, groupFromService.getName());
+        GroupDto retrievedGrupDto = groupMapper.mapToGroupDto(groupService.findGroupById(id));
+        String retrievedName = retrievedGrupDto.getName();
+        int retrievedProductsQuantity = retrievedGrupDto.getProductDtos().size();
+        assertEquals(2, retrievedProductsQuantity);
+        assertEquals(secondName, retrievedName);
     }
 
     @Test

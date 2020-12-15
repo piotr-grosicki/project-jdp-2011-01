@@ -30,7 +30,7 @@ public final class ProductEntity {
     private GroupEntity group;
 
     @ManyToMany(mappedBy = "products",
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             cascade = CascadeType.DETACH
     )
     private List<CartEntity> carts = new ArrayList<>();
