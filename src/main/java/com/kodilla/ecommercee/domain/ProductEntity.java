@@ -29,7 +29,6 @@ public final class ProductEntity {
     @JoinColumn(name = "GROUP_ID")
     private GroupEntity group;
 
-
     @ManyToMany(mappedBy = "products",
             fetch = FetchType.LAZY,
             cascade = CascadeType.DETACH
