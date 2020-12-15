@@ -30,7 +30,7 @@ public final class GroupEntity {
     @OneToMany(
             targetEntity = ProductEntity.class,
             mappedBy = "group",
-            cascade = CascadeType.ALL,
+            cascade = CascadeType.DETACH,
             fetch = FetchType.EAGER
     )
     private List<ProductEntity> products = new ArrayList<>();

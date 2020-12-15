@@ -92,24 +92,4 @@ public class GroupEntityTestSuite {
         //Then
         assertFalse(groupRepo.existsById(testGroup.getId()));
     }
-
-    @Test
-    public void shouldRemoveConnectedProductsTest() {
-        //Given
-        groupRepo.deleteAll();
-        productRepo.deleteAll();
-        GroupEntity testGroup = new GroupEntity("test name");
-        groupRepo.save(testGroup);
-        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
-        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
-        testProduct1.setGroup(testGroup);
-        testProduct2.setGroup(testGroup);
-        productRepo.save(testProduct1);
-        productRepo.save(testProduct2);
-        //When
-        groupRepo.deleteById(testGroup.getId());
-        //Then
-        assertFalse(productRepo.existsById(testProduct1.getId()));
-        assertFalse(productRepo.existsById(testProduct2.getId()));
-    }
 }
