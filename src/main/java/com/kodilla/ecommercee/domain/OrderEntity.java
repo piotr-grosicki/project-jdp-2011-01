@@ -41,13 +41,12 @@ public final class OrderEntity {
         return dateOfOrder;
     }
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "JOIN_ORDER_PRODUCT",
             joinColumns = {@JoinColumn(name = "ORDER_ID", referencedColumnName = "ORDER_ID")},
             inverseJoinColumns = {@JoinColumn(name = "PRODUCT_ID", referencedColumnName = "PRODUCT_ID")}
     )
-
     public List<ProductEntity> getProducts() {
         return products;
     }
