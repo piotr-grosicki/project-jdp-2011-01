@@ -4,6 +4,7 @@ import com.kodilla.ecommercee.controller.GroupController;
 import com.kodilla.ecommercee.mapper.GroupMapper;
 import com.kodilla.ecommercee.repository.GroupRepository;
 import com.kodilla.ecommercee.repository.ProductRepository;
+import com.kodilla.ecommercee.service.GroupService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class GroupEntityTestSuite {
     GroupMapper groupMapper;
     @Autowired
     ProductRepository productRepo;
+    @Autowired
+    GroupService groupService;
 
     @Test
     public void groupEntitySettersAndGettersTest() {
@@ -57,29 +60,32 @@ public class GroupEntityTestSuite {
         receivedGroup.ifPresent(group -> assertEquals("test name", group.getName()));
     }
 
-//    @Test
-//    public void shouldUpdateExistingGroupTest() {
-//        //Given
-//        groupRepo.deleteAll();
-//        productRepo.deleteAll();
-//        GroupEntity testGroup = new GroupEntity("test name");
-//        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
-//        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
-//        groupRepo.save(testGroup);
-//        Long id = testGroup.getId();
-//        String secondName = "new name";
-//        //When
-//        testProduct1.setGroup(testGroup);
-//        testProduct2.setGroup(testGroup);
-//        productRepo.save(testProduct1);
-//        productRepo.save(testProduct2);
-//        testGroup.setName(secondName);
-//        groupRepo.save(testGroup);
-//        Optional<GroupEntity> retrievedGroup = groupRepo.findById(id);
-//        //Then
+    @Test
+    public void shouldUpdateExistingGroupTest() {
+        //Given
+        groupRepo.deleteAll();
+        productRepo.deleteAll();
+        GroupEntity testGroup = new GroupEntity("test name");
+        ProductEntity testProduct1 = new ProductEntity("test name", "description", 1.0, null);
+        ProductEntity testProduct2 = new ProductEntity("test name", "description", 1.0, null);
+        groupRepo.save(testGroup);
+        Long id = testGroup.getId();
+        String secondName = "new name";
+        //When
+        testProduct1.setGroup(testGroup);
+        testProduct2.setGroup(testGroup);
+        productRepo.save(testProduct1);
+        productRepo.save(testProduct2);
+        testGroup.setName(secondName);
+        groupRepo.save(testGroup);
+        Optional<GroupEntity> retrievedGroup = groupRepo.findById(id);
+        //Then
+        GroupEntity groupFromService = groupService.findGroupById(id);
 //        retrievedGroup.ifPresent(g -> assertEquals(2, g.getProducts().size()));
-//        retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
-//    }
+        assertEquals(2, groupFromService.getProducts().size();
+        retrievedGroup.ifPresent(g -> assertEquals(secondName, g.getName()));
+        groupService.findGroupById()
+    }
 
     @Test
     public void shouldRemoveSingleGroup() {
